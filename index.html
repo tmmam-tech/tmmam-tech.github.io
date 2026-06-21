@@ -5,48 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تمام للتقنية | tmmam tech</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            color: #2c3e50;
-            text-align: center;
-            padding: 60px 20px;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 {
-            font-size: 3em;
-            color: #0d6efd;
-            margin-bottom: 15px;
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
         }
-        p {
-            font-size: 1.3em;
-            color: #444;
-            max-width: 600px;
-            margin: 20px auto;
-            line-height: 1.8;
+        .container {
+            max-width: 700px;
+            width: 100%;
         }
         .emoji {
-            font-size: 3em;
+            font-size: 4em;
             margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .line {
+            width: 60px;
+            height: 2px;
+            background: #d4af37; /* لون ذهبي فاخر */
+            margin: 0 auto 30px;
+            border-radius: 1px;
+        }
+        .description {
+            font-size: 1.3em;
+            color: #d0d0d0;
+            margin-bottom: 18px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        .highlight {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            background: transparent;
+            border: 1.5px solid #d4af37;
+            color: #d4af37;
+            padding: 12px 32px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 25px;
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+        .btn:hover {
+            background: #d4af37;
+            color: #0a0a0a;
         }
         .footer {
-            margin-top: 50px;
-            font-size: 0.95em;
+            margin-top: 40px;
+            font-size: 0.9em;
             color: #777;
+        }
+        .footer span {
+            color: #d4af37;
         }
     </style>
 </head>
 <body>
-    <div class="emoji">💻🚀</div>
-    <h1>تمام للتقنية  | tmmam tech</h1>
-    <p>
-        رحلة شغف و إبداع في عالم التقنية.
-    </p>
-    <p>
-        هنا ستجد مواضيع مفيدة ونادرة في الويب و البرامج والتقنيات الحديثة.
-    </p>
-    <div class="footer">
-        تصميم   — tmmam تمام ❤️
+    <div class="container">
+        <div class="emoji">💻🚀</div>
+        <h1>تمام للتقنية</h1>
+        <div class="subtitle">tmmam tech</div>
+        <div class="line"></div>
+        <p class="description">
+            رحلة شغف وإبداع في عالم التقنية.
+        </p>
+        <p class="description">
+            هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
+        </p>
+        <!-- https://tmmam-tech.github.io/ -->
+        <a href="#" class="btn">قريباً</a>
+        <div class="footer">
+            تصميم — <span>tmmam تمام ❤️</span>
+        </div>
     </div>
 </body>
 </html>
