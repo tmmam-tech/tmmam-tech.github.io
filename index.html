@@ -42,26 +42,27 @@
             color: #d4af37;
             border-bottom: 2px solid #d4af37;
         }
-        /* المحتوى الرئيسي */
         .main-content {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 85vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
         .container {
             max-width: 700px;
             width: 100%;
         }
-        .emoji {
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* الصورة الرمزية */
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d4af37;
+            box-shadow: 0 0 25px rgba(212,175,55,0.3);
+            margin-bottom: 25px;
+            background: #0a0a0a;
         }
         h1 {
             font-size: 2.8em;
@@ -83,12 +84,27 @@
             margin: 0 auto 30px;
             border-radius: 1px;
         }
-        .description {
+        /* تأثير الكتابة */
+        #typewriter {
             font-size: 1.3em;
             color: #d0d0d0;
             margin-bottom: 18px;
             line-height: 1.8;
             font-weight: 400;
+            min-height: 2em;
+        }
+        .cursor {
+            display: inline-block;
+            background: #d4af37;
+            width: 2px;
+            height: 1.2em;
+            margin-right: 4px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
         .highlight {
             color: #d4af37;
@@ -106,18 +122,37 @@
             margin: 10px 8px;
             transition: 0.3s ease;
             font-weight: 500;
-            position: relative;
         }
         .btn:hover {
             background: #d4af37;
             color: #0a0a0a;
         }
+        .badge {
+            background: #d4af37;
+            color: #0a0a0a;
+            font-size: 0.7em;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        /* عداد الزوار */
+        .visitor-count {
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #888;
+        }
+        .visitor-count span {
+            color: #d4af37;
+            font-weight: bold;
+        }
         .footer {
-            margin-top: 40px;
+            margin-top: 20px;
             font-size: 0.9em;
             color: #777;
         }
@@ -127,44 +162,86 @@
     </style>
 </head>
 <body>
-    <!-- شريط التنقل العلوي -->
     <nav>
         <a href="index.html" class="active">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
     </nav>
 
-    <!-- المحتوى الرئيسي للصفحة -->
     <div class="main-content">
         <div class="container">
-            <div class="emoji">💻🚀</div>
+            <!-- صورة رمزية حقيقية (مولّدة تلقائياً) -->
+            <img src="https://ui-avatars.com/?name=Tammam&background=d4af37&color=0a0a0a&size=128"
+                 alt="تمام" class="avatar">
+
             <h1>تمام للتقنية</h1>
             <div class="subtitle">tmmam tech</div>
             <div class="line"></div>
-            <p class="description">
-                رحلة شغف وإبداع في عالم التقنية.
-            </p>
-            <p class="description">
+
+            <!-- تأثير الكتابة -->
+            <div id="typewriter"></div>
+
+            <p class="description" style="font-size:1.1em; color:#c0c0c0;">
                 هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
             </p>
+
             <a href="about.html" class="btn">من أنا؟</a>
             <a href="links.html" class="btn">
                 روابط التواصل
-                <span style="
-                    background: #d4af37;
-                    color: #0a0a0a;
-                    font-size: 0.7em;
-                    font-weight: bold;
-                    padding: 3px 8px;
-                    border-radius: 12px;
-                    margin-right: 8px;
-                    animation: pulse 1.5s infinite;
-                ">جديد</span>
+                <span class="badge">جديد</span>
             </a>
+
+            <!-- عداد الزوار -->
+            <div class="visitor-count">
+                👁️ أنت الزائر رقم <span id="visitCount">0</span> لهذا الموقع
+            </div>
+
             <div class="footer">
                 تصميم — <span>tmmam تمام ❤️</span>
             </div>
         </div>
     </div>
+
+    <!-- سكريبت تأثير الكتابة وعداد الزوار -->
+    <script>
+        // ===== تأثير الكتابة =====
+        (function() {
+            const text = "رحلة شغف وإبداع في عالم التقنية.";
+            const speed = 60; // سرعة الكتابة (مللي ثانية)
+            const container = document.getElementById("typewriter");
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    container.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                } else {
+                    // بعد الانتهاء، نضيف المؤشر الوامض
+                    const cursor = document.createElement("span");
+                    cursor.className = "cursor";
+                    container.appendChild(cursor);
+                }
+            }
+
+            // بدء الكتابة بعد تحميل الصفحة بقليل
+            window.addEventListener("load", () => {
+                setTimeout(type, 400);
+            });
+        })();
+
+        // ===== عداد الزوار (محلي، يعتمد على المتصفح) =====
+        (function() {
+            const countSpan = document.getElementById("visitCount");
+            let count = localStorage.getItem("tmmam_visits");
+            if (!count) {
+                count = 1;
+            } else {
+                count = parseInt(count) + 1;
+            }
+            localStorage.setItem("tmmam_visits", count);
+            countSpan.textContent = count;
+        })();
+    </script>
 </body>
 </html>
