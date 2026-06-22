@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفع الملفات — تمام للتقنية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+        }
+        nav {
+            background: #111;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover, nav a.active {
+            color: #d4af37;
+            border-bottom: 2px solid #d4af37;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 30px 20px;
+        }
+        .upload-container {
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h2 {
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #b0b0b0;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+        .drop-zone {
+            border: 2px dashed #333;
+            border-radius: 16px;
+            padding: 40px 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+            background: #0a0a0a;
+        }
+        .drop-zone:hover, .drop-zone.drag-active {
+            border-color: #d4af37;
+            background: #1a1a1a;
+        }
+        .drop-zone .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .drop-zone p {
+            color: #888;
+            margin: 5px 0;
+        }
+        .drop-zone .browse {
+            color: #d4af37;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-list {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .file-item {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .file-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .file-name {
+            color: #e0e0e0;
+        }
+        .file-size {
+            color: #888;
+            font-size: 0.8em;
+        }
+        .remove-file {
+            color: #ff6b6b;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.2em;
+        }
+        .progress-container {
+            margin-bottom: 20px;
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #d4af37;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        .btn {
+            background: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #e0c04a;
+        }
+        .btn:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .footer {
+            margin-top: 25px;
+            font-size: 0.85em;
+            color: #666;
+        }
+        .footer span {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="about.html">👤 من أنا؟</a>
+        <a href="links.html">🔗 روابط</a>
+        <a href="calculator.html">🧮 آلة حاسبة</a>
+        <a href="upload.html" class="active">☁️ رفع ملفات</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="upload-container">
+            <h2>☁️ رفع الملفات</h2>
+            <p class="subtitle">تجربة تفاعلية لمحاكاة رفع الملفات</p>
+
+            <!-- منطقة السحب والإفلات -->
+            <div class="drop-zone" id="dropZone">
+                <div class="icon">📁</div>
+                <p>اسحب وأفلت الملفات هنا</p>
+                <p>أو <span class="browse">اختر من جهازك</span></p>
+            </div>
+            <input type="file" id="fileInput" multiple>
+
+            <!-- قائمة الملفات المختارة -->
+            <div class="file-list" id="fileList"></div>
+
+            <!-- شريط التقدم -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- زر الرفع -->
+            <button class="btn" id="uploadBtn" disabled>رفع الملفات 🚀</button>
+
+            <div class="footer">
+                تصميم — <span>tmmam تمام ❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById("dropZone");
+        const fileInput = document.getElementById("fileInput");
+        const fileList = document.getElementById("fileList");
+        const uploadBtn = document.getElementById("uploadBtn");
+        const progressContainer = document.getElementById("progressContainer");
+        const progressFill = document.getElementById("progressFill");
+        let selectedFiles = [];
+
+        // فتح نافذة اختيار الملفات عند الضغط على المنطقة
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        // منع السلوك الافتراضي للسحب
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add("drag-active");
+        });
+        dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-active"));
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropZone.classList.remove("drag-active");
+            handleFiles(e.dataTransfer.files);
+        });
+
+        // عند اختيار ملفات من الزر
+        fileInput.addEventListener("change", () => handleFiles(fileInput.files));
+
+        function handleFiles(files) {
+            selectedFiles = [...selectedFiles, ...files];
+            renderFileList();
+            uploadBtn.disabled = selectedFiles.length === 0;
+        }
+
+        function renderFileList() {
+            fileList.innerHTML = "";
+            selectedFiles.forEach((file, index) => {
+                const item = document.createElement("div");
+                item.className = "file-item";
+                item.innerHTML = `
+                    <div class="file-info">
+                        <span class="file-name">📄 ${file.name}</span>
+                        <span class="file-size">${formatSize(file.size)}</span>
+                    </div>
+                    <button class="remove-file" onclick="removeFile(${index})">✕</button>
+                `;
+                fileList.appendChild(item);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+            uploadBtn.disabled = selectedFiles.length === 0;
+            progressContainer.style.display = "none";
+        }
+
+        function formatSize(bytes) {
+            if (bytes === 0) return "0 بايت";
+            const sizes = ["بايت", "ك.ب", "م.ب", "ج.ب"];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i];
+        }
+
+        // محاكاة عملية الرفع
+        uploadBtn.addEventListener("click", () => {
+            if (selectedFiles.length === 0) return;
+            progressContainer.style.display = "block";
+            progressFill.style.width = "0%";
+            uploadBtn.disabled = true;
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20 + 5;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    progressFill.style.width = "100%";
+                    setTimeout(() => {
+                        alert(`تم رفع ${selectedFiles.length} ملفات بنجاح! 🎉`);
+                        selectedFiles = [];
+                        renderFileList();
+                        progressContainer.style.display = "none";
+                        progressFill.style.width = "0%";
+                        uploadBtn.disabled = true;
+                    }, 400);
+                } else {
+                    progressFill.style.width = progress + "%";
+                }
+            }, 400);
+        });
+    </script>
+</body>
+</html>
