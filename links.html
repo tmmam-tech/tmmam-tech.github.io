@@ -133,7 +133,14 @@
         .footer span {
             color: #d4af37;
         }
-    </style>
+    .avatar {
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s;
+    transform-style: preserve-3d;
+}
+.avatar:hover {
+    transform: perspective(800px) rotateY(25deg) scale(1.08);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.7), 0 0 60px rgba(212, 175, 55, 0.2);
+}</style>
 </head>
 <body>
     <!-- شريط التنقل -->
@@ -146,9 +153,7 @@
     <div class="main-content">
         <div class="container">
             <!-- صورة رمزية -->
-            <img src="https://ui-avatars.com/?name=Tammam&background=d4af37&color=0a0a0a&size=128"
-                 alt="تمام" class="avatar">
-
+            <img src="tech-logo.png" alt="شعار تمام للتقنية" class="avatar">
             <h1>تمام</h1>
             <p class="bio">تمام للتقنية | tmmam tech</p>
             <div class="line"></div>
