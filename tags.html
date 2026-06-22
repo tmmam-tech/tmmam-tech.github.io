@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الوسوم — تمام للتقنية</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+        }
+        nav {
+            background: #111;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover, nav a.active {
+            color: #d4af37;
+            border-bottom: 2px solid #d4af37;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        .tag-section {
+            margin-bottom: 40px;
+            text-align: right;
+        }
+        .tag-title {
+            color: #d4af37;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .post-link {
+            display: block;
+            color: #c0c0c0;
+            text-decoration: none;
+            padding: 8px 0;
+            transition: 0.3s;
+            font-size: 1.1em;
+        }
+        .post-link:hover { color: #d4af37; }
+        .footer {
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.85em;
+        }
+        .footer span { color: #d4af37; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="about.html">👤 من أنا؟</a>
+        <a href="links.html">🔗 روابط</a>
+        <a href="calculator.html">🧮 آلة حاسبة</a>
+        <a href="http://tmmamfiles.infinityfreeapp.com" target="_blank">☁️ استضافة الملفات</a>
+        <a href="tags.html" class="active">📂 الوسوم</a>
+    </nav>
+
+    <div class="container">
+        <h1>📂 تصفح المواضيع حسب الوسوم</h1>
+
+        <div class="tag-section" id="برامج">
+            <h2 class="tag-title">🖥️ برامج</h2>
+            <a href="post1.html" class="post-link">📄 أفضل 5 برامج مجانية للكمبيوتر في 2026</a>
+        </div>
+
+        <div class="tag-section" id="تقنية">
+            <h2 class="tag-title">💡 تقنية</h2>
+            <a href="post1.html" class="post-link">📄 أفضل 5 برامج مجانية للكمبيوتر في 2026</a>
+        </div>
+
+        <div class="tag-section" id="كمبيوتر">
+            <h2 class="tag-title">💻 كمبيوتر</h2>
+            <a href="post1.html" class="post-link">📄 أفضل 5 برامج مجانية للكمبيوتر في 2026</a>
+        </div>
+
+        <div class="footer">
+            تصميم — <span>tmmam تمام ❤️</span>
+        </div>
+    </div>
+</body>
+</html>
