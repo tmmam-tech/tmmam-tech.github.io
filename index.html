@@ -159,7 +159,41 @@
         .footer span {
             color: #d4af37;
         }
-    </style>
+   /* إطار الحاوية للحركة */
+.logo-container {
+    display: inline-block;
+    border-radius: 50%;
+    margin-bottom: 25px;
+}
+
+/* تفعيل الأنيميشن */
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    background: #0a0a0a;
+    animation: luxPulse 3s ease-in-out infinite;
+    transition: 0.3s;
+}
+
+/* تعريف النبض الذهبي الفاخر */
+@keyframes luxPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.9), 0 0 60px rgba(212, 175, 55, 0.3);
+        transform: scale(1.03);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        transform: scale(1);
+    }
+} </style>
 </head>
 <body>
     <nav>
@@ -171,7 +205,10 @@
     <div class="main-content">
         <div class="container">
             <!-- صورة رمزية حقيقية (مولّدة تلقائياً) -->
-            <img src="tech-logo.png" alt="شعار تمام للتقنية" class="avatar">
+            <!-- شعار متحرك احترافياً بواسطة CSS -->
+<div class="logo-container">
+    <img src="logo.png" alt="شعار تمام للتقنية" class="avatar">
+</div>
             <h1>تمام للتقنية</h1>
             <div class="subtitle">tmmam tech</div>
             <div class="line"></div>
