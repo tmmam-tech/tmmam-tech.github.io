@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روابط تمام للتقنية</title>
+    <title>روابط — تمام للتقنية</title>
     <style>
         * {
             margin: 0;
@@ -14,12 +14,42 @@
             background-color: #0a0a0a;
             color: #f1f1f1;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+        }
+        /* شريط التنقل */
+        nav {
+            background: #111;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover,
+        nav a.active {
+            color: #d4af37;
+            border-bottom: 2px solid #d4af37;
+        }
+        /* المحتوى الرئيسي */
+        .main-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px;
+            min-height: 85vh;
+            padding: 40px 20px;
         }
         .container {
             max-width: 500px;
@@ -90,66 +120,58 @@
             font-size: 0.85em;
             color: #666;
         }
-        .back-btn {
-            display: inline-block;
-            margin-top: 25px;
-            color: #888;
-            text-decoration: none;
-            font-size: 0.95em;
-            transition: 0.3s;
-        }
-        .back-btn:hover {
+        .footer span {
             color: #d4af37;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- صورة رمزية (يمكنك تغيير الإيموجي إلى صورتك لاحقاً) -->
-        <div class="avatar">👨‍💻</div>
-        
-        <h1>تمام</h1>
-        <p class="bio">تمام للتقنية | tmmam tech</p>
-        <div class="line"></div>
+    <!-- شريط التنقل -->
+    <nav>
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="about.html">👤 من أنا؟</a>
+        <a href="links.html" class="active">🔗 روابط</a>
+    </nav>
 
-        <!-- قائمة الروابط -->
-        <div class="links">
-            <!-- رابط GitHub -->
-            <a href="https://github.com/tmmam-tech" target="_blank" class="link-btn">
-                <span class="icon">🐙</span>
-                GitHub
-            </a>
+    <!-- المحتوى -->
+    <div class="main-content">
+        <div class="container">
+            <!-- صورة رمزية -->
+            <div class="avatar">👨‍💻</div>
             
-            <!-- رابط تلغرام (غيّر الرابط إلى قناتك أو معرفك) -->
-            <a href="https://t.me/" target="_blank" class="link-btn">
-                <span class="icon">✈️</span>
-                تلغرام
-            </a>
-            
-            <!-- رابط يوتيوب -->
-            <a href="https://youtube.com/" target="_blank" class="link-btn">
-                <span class="icon">▶️</span>
-                يوتيوب
-            </a>
-            
-            <!-- رابط الموقع الرئيسي -->
-            <a href="index.html" class="link-btn">
-                <span class="icon">🌐</span>
-                موقعي الشخصي
-            </a>
+            <h1>تمام</h1>
+            <p class="bio">تمام للتقنية | tmmam tech</p>
+            <div class="line"></div>
 
-            <!-- رابط إضافي (مثلاً صفحة من أنا؟) -->
-            <a href="about.html" class="link-btn">
-                <span class="icon">👤</span>
-                من أنا؟
-            </a>
+            <!-- قائمة الروابط -->
+            <div class="links">
+                <a href="https://github.com/tmmam-tech" target="_blank" class="link-btn">
+                    <span class="icon">🐙</span>
+                    GitHub
+                </a>
+                <a href="https://t.me/" target="_blank" class="link-btn">
+                    <span class="icon">✈️</span>
+                    تلغرام
+                </a>
+                <a href="https://youtube.com/" target="_blank" class="link-btn">
+                    <span class="icon">▶️</span>
+                    يوتيوب
+                </a>
+                <a href="index.html" class="link-btn">
+                    <span class="icon">🌐</span>
+                    موقعي الشخصي
+                </a>
+                <a href="about.html" class="link-btn">
+                    <span class="icon">👤</span>
+                    من أنا؟
+                </a>
+            </div>
+
+            <!-- توقيع -->
+            <div class="footer">
+                تصميم — <span>tmmam تمام ❤️</span>
+            </div>
         </div>
-
-        <!-- توقيع -->
-        <div class="footer">
-            تصميم — tmmam تمام ❤️
-        </div>
-        <a href="index.html" class="back-btn">🏠 العودة للرئيسية</a>
     </div>
 </body>
 </html>
