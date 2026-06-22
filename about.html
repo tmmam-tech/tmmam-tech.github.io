@@ -14,15 +14,45 @@
             background-color: #0a0a0a;
             color: #f1f1f1;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+        }
+        /* شريط التنقل */
+        nav {
+            background: #111;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: 0.3s;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover,
+        nav a.active {
+            color: #d4af37;
+            border-bottom: 2px solid #d4af37;
+        }
+        /* المحتوى الرئيسي */
+        .main-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 20px;
+            min-height: 85vh;
+            padding: 40px 20px;
         }
         .container {
-            max-width: 650px;
+            max-width: 600px;
             width: 100%;
         }
         .emoji {
@@ -49,11 +79,11 @@
             border-radius: 1px;
         }
         .bio {
-            font-size: 1.2em;
+            font-size: 1.15em;
             color: #d0d0d0;
             line-height: 2;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.03);
             padding: 25px;
             border-radius: 12px;
             border: 1px solid #222;
@@ -62,83 +92,120 @@
             color: #d4af37;
             font-weight: 600;
         }
+        /* قسم المهارات */
         .section-title {
             font-size: 1.3em;
             color: #d4af37;
-            margin: 30px 0 15px;
+            margin: 35px 0 20px;
             font-weight: 600;
         }
-        .list {
-            list-style: none;
-            padding: 0;
+        .skills {
             text-align: right;
-            display: inline-block;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        .list li {
-            font-size: 1.15em;
+        .skill-item {
+            margin-bottom: 18px;
+        }
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 1em;
             color: #c0c0c0;
-            margin: 12px 0;
-            padding-right: 20px;
-            position: relative;
         }
-        .list li::before {
-            content: "▹";
-            color: #d4af37;
-            position: absolute;
-            right: 0;
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        .btn {
-            display: inline-block;
-            background: transparent;
-            border: 1.5px solid #d4af37;
-            color: #d4af37;
-            padding: 12px 32px;
-            font-size: 1.1em;
-            border-radius: 30px;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: 0.3s ease;
-            font-weight: 500;
-        }
-        .btn:hover {
-            background: #d4af37;
-            color: #0a0a0a;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #b8930f);
+            border-radius: 10px;
+            width: 0%;
         }
         .footer {
-            margin-top: 35px;
-            font-size: 0.85em;
-            color: #666;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .footer span {
+            color: #d4af37;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="emoji">👨‍💻</div>
-        <h1>تمام</h1>
-        <!-- العلم السوري الجديد -->
-<div style="width: 80px; height: 50px; margin: 10px auto 20px; position: relative;">
-  <div style="background:#006b3f; height:33.33%; width:100%;"></div>
-  <div style="background:#ffffff; height:33.33%; width:100%; position:relative; text-align:center; line-height:16px;">
-    <span style="color:#ce1126; font-size:16px; letter-spacing:6px; display:inline-block; position:relative; top:-4px;">★★★</span>
-  </div>
-  <div style="background:#000000; height:33.33%; width:100%;"></div>
-</div>
-<div class="location"> من سوريا</div>
-        <div class="line"></div>
-        <div class="bio">
-            <p>أهلاً بك في <span class="highlight">تمام للتقنية</span>.</p>
-            <p>أنت في المكان الصحيح.</p>
-            <p>هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.</p>
-        </div>
-        <div class="section-title">💡 ماذا أقدّم؟</div>
-        <ul class="list">
-            <li>تجارب ونصائح في البرامج والتطبيقات</li>
-            <li>محتوى تقني نادر ومفيد</li>
-            <li>رحلة تعلم ومشاركة مستمرة</li>
-        </ul>
-        <a href="index.html" class="btn">🏠 العودة للرئيسية</a>
-        <div class="footer">
-            تصميم — tmmam تمام ❤️
+    <!-- شريط التنقل -->
+    <nav>
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="about.html" class="active">👤 من أنا؟</a>
+        <a href="links.html">🔗 روابط</a>
+    </nav>
+
+    <!-- المحتوى -->
+    <div class="main-content">
+        <div class="container">
+            <!-- صورة رمزية (يمكنك تغيير الإيموجي لاحقاً إلى صورة حقيقية) -->
+            <div class="emoji">👨‍💻</div>
+            
+            <h1>تمام</h1>
+            <div class="location">🇸🇾 من سوريا</div>
+            <div class="line"></div>
+
+            <div class="bio">
+                <p>أهلاً بك في <span class="highlight">تمام للتقنية</span>.</p>
+                <p>أنت في المكان الصحيح.</p>
+                <p>هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.</p>
+            </div>
+
+            <!-- قسم المهارات -->
+            <div class="section-title">💡 ماذا أقدّم؟</div>
+            <div class="skills">
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>تطوير الويب (HTML/CSS)</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:70%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Git و GitHub</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:50%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>جافا سكريبت (JavaScript)</span>
+                        <span>30%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:30%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>التصميم وتجربة المستخدم</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:60%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- توقيع -->
+            <div class="footer">
+                تصميم — <span>tmmam تمام ❤️</span>
+            </div>
         </div>
     </div>
 </body>
