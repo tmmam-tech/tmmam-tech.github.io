@@ -148,7 +148,26 @@
         .footer span {
             color: #d4af37;
         }
-    </style>
+    .avatar {
+    /* إعدادات ثلاثية الأبعاد */
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    animation: rotate3d 8s infinite linear, glowPulse 2s infinite ease-in-out;
+    transform-style: preserve-3d;
+}
+
+@keyframes rotate3d {
+    0% { transform: perspective(600px) rotateY(0deg); }
+    100% { transform: perspective(600px) rotateY(360deg); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4), 0 0 30px rgba(212, 175, 55, 0.1);
+    }
+    50% { 
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 0 50px rgba(212, 175, 55, 0.3);
+    }
+}</style>
 </head>
 <body>
     <!-- شريط التنقل -->
@@ -161,8 +180,7 @@
     <div class="main-content">
         <div class="container">
             <!-- صورة رمزية (يمكنك تغييرها لصورتك الحقيقية لاحقاً) -->
-            <img src="https://ui-avatars.com/?name=Tammam&background=d4af37&color=0a0a0a&size=128"
-                 alt="تمام" class="avatar">
+            <img src="tech-logo.png" alt="شعار تمام للتقنية" class="avatar">
             <h1>تمام</h1>
             <div class="location"> من سوريا</div>
             <div class="line"></div>
