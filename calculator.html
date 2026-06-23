@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>آلة حاسبة — تمام للتقنية</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: #0a0a0a;
             color: #f1f1f1;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        /* شريط التنقل */
+        /* شبكة متحركة */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.2;
+            pointer-events: none;
+        }
         nav {
-            background: #111;
+            background: rgba(17,17,17,0.9);
             border-bottom: 1px solid #2a2a2a;
             padding: 15px 0;
-            text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -33,13 +37,11 @@
             text-decoration: none;
             margin: 0 14px;
             font-weight: 600;
-            font-size: 1.05em;
             transition: 0.3s;
             padding: 8px 0;
             border-bottom: 2px solid transparent;
         }
-        nav a:hover,
-        nav a.active {
+        nav a:hover, nav a.active {
             color: #d4af37;
             border-bottom: 2px solid #d4af37;
         }
@@ -49,6 +51,8 @@
             align-items: center;
             min-height: 80vh;
             padding: 30px 20px;
+            position: relative;
+            z-index: 1;
         }
         .calculator {
             background: #111;
@@ -57,6 +61,12 @@
             padding: 25px 20px;
             width: 320px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .display {
             background: #0a0a0a;
@@ -113,29 +123,26 @@
             font-size: 0.85em;
             color: #666;
         }
-        .footer span {
-            color: #d4af37;
-        }
+        .footer span { color: #d4af37; }
         .visitor-count {
             margin-top: 10px;
             font-size: 0.9em;
             color: #888;
         }
-        .visitor-count span {
-            color: #d4af37;
-            font-weight: bold;
-        }
+        .visitor-count span { color: #d4af37; font-weight: bold; }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <nav>
         <a href="index.html">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
         <a href="calculator.html" class="active">🧮 آلة حاسبة</a>
-        <a href="http://tmmamfiles.infinityfreeapp.com" target="_blank">☁️  رفع الملفات</a>
+        <a href="upload.html">☁️ رفع ملفات</a>
+        <a href="http://tmmamfiles.infinityfreeapp.com" target="_blank">☁️ استضافة الملفات</a>
+        <a href="http://tmmamtech.blogspot.com" target="_blank">📰 المدونة</a>
     </nav>
-    <a href="tags.html">📂 المواضيع</a>
 
     <div class="main-content">
         <div class="calculator">
@@ -145,22 +152,18 @@
                 <button onclick="appendNumber('8')">8</button>
                 <button onclick="appendNumber('9')">9</button>
                 <button class="operator" onclick="appendOperator('/')">÷</button>
-
                 <button onclick="appendNumber('4')">4</button>
                 <button onclick="appendNumber('5')">5</button>
                 <button onclick="appendNumber('6')">6</button>
                 <button class="operator" onclick="appendOperator('*')">×</button>
-
                 <button onclick="appendNumber('1')">1</button>
                 <button onclick="appendNumber('2')">2</button>
                 <button onclick="appendNumber('3')">3</button>
                 <button class="operator" onclick="appendOperator('-')">−</button>
-
                 <button onclick="appendNumber('0')">0</button>
                 <button onclick="appendNumber('.')">.</button>
                 <button class="equals" onclick="calculate()">=</button>
                 <button class="operator" onclick="appendOperator('+')">+</button>
-
                 <button class="clear" onclick="clearAll()" style="grid-column: span 2;">مسح الكل</button>
                 <button onclick="deleteLast()" style="grid-column: span 2;">حذف الأخير</button>
             </div>
@@ -174,17 +177,60 @@
     </div>
 
     <script>
-        // ===== عداد الزوار =====
+        // ===== خلفية شبكية =====
         (function() {
-            const countSpan = document.getElementById("visitCount");
-            let count = localStorage.getItem("tmmam_visits_calc");
-            if (!count) {
-                count = 1;
-            } else {
-                count = parseInt(count) + 1;
+            const canvas = document.getElementById("bg-canvas");
+            const ctx = canvas.getContext("2d");
+            let w, h;
+            const particles = [];
+            const particleCount = 40;
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
             }
-            localStorage.setItem("tmmam_visits_calc", count);
-            countSpan.textContent = count;
+            window.addEventListener("resize", resize);
+            resize();
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: (Math.random() - 0.5) * 0.6,
+                    r: Math.random() * 1.5 + 0.5
+                });
+            }
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                ctx.strokeStyle = "#d4af37";
+                ctx.fillStyle = "rgba(212,175,55,0.3)";
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 110) {
+                            ctx.globalAlpha = 0.08 * (1 - dist / 110);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                ctx.globalAlpha = 1;
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > w) p.vx *= -1;
+                    if (p.y < 0 || p.y > h) p.vy *= -1;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
         })();
 
         // ===== منطق الآلة الحاسبة =====
@@ -192,13 +238,8 @@
         let firstOperand = null;
         let operator = null;
         let waitingForSecondOperand = false;
-
         const display = document.getElementById("display");
-
-        function updateDisplay() {
-            display.textContent = displayValue;
-        }
-
+        function updateDisplay() { display.textContent = displayValue; }
         function appendNumber(num) {
             if (waitingForSecondOperand) {
                 displayValue = num;
@@ -208,28 +249,19 @@
             }
             updateDisplay();
         }
-
         function appendOperator(op) {
             const inputValue = parseFloat(displayValue);
-
-            if (operator && waitingForSecondOperand) {
-                operator = op;
-                return;
-            }
-
-            if (firstOperand === null) {
-                firstOperand = inputValue;
-            } else if (operator) {
+            if (operator && waitingForSecondOperand) { operator = op; return; }
+            if (firstOperand === null) { firstOperand = inputValue; }
+            else if (operator) {
                 const result = performCalculation(firstOperand, inputValue, operator);
                 displayValue = String(result);
                 firstOperand = result;
             }
-
             waitingForSecondOperand = true;
             operator = op;
             updateDisplay();
         }
-
         function performCalculation(first, second, op) {
             switch (op) {
                 case '+': return first + second;
@@ -239,7 +271,6 @@
                 default: return second;
             }
         }
-
         function calculate() {
             if (operator && !waitingForSecondOperand) {
                 const inputValue = parseFloat(displayValue);
@@ -251,7 +282,6 @@
                 updateDisplay();
             }
         }
-
         function clearAll() {
             displayValue = "0";
             firstOperand = null;
@@ -259,7 +289,6 @@
             waitingForSecondOperand = false;
             updateDisplay();
         }
-
         function deleteLast() {
             if (displayValue.length > 1) {
                 displayValue = displayValue.slice(0, -1);
@@ -268,6 +297,16 @@
             }
             updateDisplay();
         }
+
+        // ===== عداد الزوار =====
+        (function() {
+            const countSpan = document.getElementById("visitCount");
+            let count = localStorage.getItem("tmmam_visits_calc");
+            if (!count) { count = 1; }
+            else { count = parseInt(count) + 1; }
+            localStorage.setItem("tmmam_visits_calc", count);
+            countSpan.textContent = count;
+        })();
     </script>
 </body>
 </html>
