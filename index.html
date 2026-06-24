@@ -207,7 +207,6 @@
         <a href="index.html" class="active">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
-        <a href="calculator.html">🧮 آلة حاسبة</a>
         <a href="http://tmmamfiles.infinityfreeapp.com" target="_blank">☁️ استضافة الملفات</a>
         <a href="http://tmmamtech.blogspot.com" target="_blank">📰 المدونة</a>
     </nav>
@@ -356,7 +355,31 @@
             }
             type();
         })();
+<!-- قسم أحدث المقالات من المدونة -->
+<div id="latest-post" style="margin: 40px auto; max-width: 600px; text-align: right; background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; display: none;">
+    <h3 style="color: #d4af37; margin-bottom: 15px;">📰 أحدث مقال من المدونة</h3>
+    <a id="latest-post-link" href="#" style="color: #f1f1f1; text-decoration: none; font-size: 1.2em;"></a>
+    <p id="latest-post-date" style="color: #888; margin-top: 10px;"></p>
+</div>
 
+<script>
+fetch('https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=1')
+  .then(response => response.json())
+  .then(data => {
+    if (data.feed && data.feed.entry) {
+      const entry = data.feed.entry[0];
+      const title = entry.title.$t;
+      const link = entry.link.find(l => l.rel === 'alternate').href;
+      const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
+      
+      document.getElementById('latest-post-link').href = link;
+      document.getElementById('latest-post-link').textContent = '📄 ' + title;
+      document.getElementById('latest-post-date').textContent = '📅 ' + date;
+      document.getElementById('latest-post').style.display = 'block';
+    }
+  })
+  .catch(err => console.error('Error fetching posts:', err));
+</script>
         // ===== عداد الزوار =====
         (function() {
             const countSpan = document.getElementById("visitCount");
