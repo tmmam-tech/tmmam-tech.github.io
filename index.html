@@ -371,11 +371,11 @@
     </script>
 </body>
 </html>
-<!-- قسم أحدث المقالات من المدونة -->
-<div id="latest-post" style="margin: 40px auto; max-width: 600px; text-align: right; background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; display: none;">
+<div id="latest-post" style="margin: 40px auto; max-width: 600px; text-align: right; background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px;">
     <h3 style="color: #d4af37; margin-bottom: 15px;">📰 أحدث مقال من المدونة</h3>
-    <a id="latest-post-link" href="#" style="color: #f1f1f1; text-decoration: none; font-size: 1.2em;"></a>
-    <p id="latest-post-date" style="color: #888; margin-top: 10px;"></p>
+    <p id="latest-post-message" style="color: #888;">⏳ لا توجد مقالات بعد. ترقبوا القادم!</p>
+    <a id="latest-post-link" href="#" style="color: #f1f1f1; text-decoration: none; font-size: 1.2em; display: none;"></a>
+    <p id="latest-post-date" style="color: #888; margin-top: 10px; display: none;"></p>
 </div>
 
 <script>
@@ -388,10 +388,14 @@ fetch('https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=1')
       const link = entry.link.find(l => l.rel === 'alternate').href;
       const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
       
-      document.getElementById('latest-post-link').href = link;
-      document.getElementById('latest-post-link').textContent = '📄 ' + title;
-      document.getElementById('latest-post-date').textContent = '📅 ' + date;
-      document.getElementById('latest-post').style.display = 'block';
+      document.getElementById('latest-post-message').style.display = 'none';
+      const linkEl = document.getElementById('latest-post-link');
+      linkEl.href = link;
+      linkEl.textContent = '📄 ' + title;
+      linkEl.style.display = 'inline';
+      const dateEl = document.getElementById('latest-post-date');
+      dateEl.textContent = '📅 ' + date;
+      dateEl.style.display = 'block';
     }
   })
   .catch(err => console.error('Error fetching posts:', err));
