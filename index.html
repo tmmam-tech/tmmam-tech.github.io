@@ -355,6 +355,22 @@
             }
             type();
         })();
+
+        // ===== عداد الزوار =====
+        (function() {
+            const countSpan = document.getElementById("visitCount");
+            let count = localStorage.getItem("tmmam_visits");
+            if (!count) {
+                count = 1;
+            } else {
+                count = parseInt(count) + 1;
+            }
+            localStorage.setItem("tmmam_visits", count);
+            countSpan.textContent = count;
+        })();
+    </script>
+</body>
+</html>
 <!-- قسم أحدث المقالات من المدونة -->
 <div id="latest-post" style="margin: 40px auto; max-width: 600px; text-align: right; background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px; display: none;">
     <h3 style="color: #d4af37; margin-bottom: 15px;">📰 أحدث مقال من المدونة</h3>
@@ -380,18 +396,3 @@ fetch('https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=1')
   })
   .catch(err => console.error('Error fetching posts:', err));
 </script>
-        // ===== عداد الزوار =====
-        (function() {
-            const countSpan = document.getElementById("visitCount");
-            let count = localStorage.getItem("tmmam_visits");
-            if (!count) {
-                count = 1;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem("tmmam_visits", count);
-            countSpan.textContent = count;
-        })();
-    </script>
-</body>
-</html>
