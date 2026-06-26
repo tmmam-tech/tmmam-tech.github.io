@@ -12,27 +12,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        /* شبكة متحركة في الخلفية */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.2;
-            pointer-events: none;
         }
         nav {
-            background: rgba(17,17,17,0.9);
+            background: #111;
             border-bottom: 1px solid #2a2a2a;
             padding: 15px 0;
+            text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
         }
         nav a {
             color: #e0e0e0;
@@ -40,109 +28,65 @@
             margin: 0 14px;
             font-weight: 600;
             transition: 0.3s;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
         }
-        nav a:hover, nav a.active {
-            color: #d4af37;
-            border-bottom: 2px solid #d4af37;
-        }
-        .main-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 85vh;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
+        nav a:hover { color: #d4af37; }
         .container {
             max-width: 700px;
-            width: 100%;
+            margin: 50px auto;
+            padding: 20px;
         }
-        /* صورة رمزية */
         .avatar {
             width: 110px;
             height: 110px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #d4af37;
-            box-shadow: 0 0 25px rgba(212,175,55,0.3);
             margin-bottom: 25px;
-            background: #0a0a0a;
-            animation: float 4s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
         h1 {
             font-size: 2.8em;
-            font-weight: 700;
-            color: #ffffff;
+            color: #d4af37;
             margin-bottom: 10px;
-            letter-spacing: -1px;
         }
         .subtitle {
             font-size: 1.2em;
             color: #b0b0b0;
             margin-bottom: 30px;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
         .line {
             width: 60px;
             height: 2px;
             background: #d4af37;
             margin: 0 auto 30px;
-            border-radius: 1px;
-            animation: expandLine 1s ease forwards;
         }
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: 60px; }
-        }
-        /* عنوان متحرك */
-        .typing-box {
-            font-size: 1.4em;
+        .description {
+            font-size: 1.3em;
             color: #d0d0d0;
             margin-bottom: 18px;
             line-height: 1.8;
-            font-weight: 400;
-            min-height: 2em;
-        }
-        .typing-text {
-            color: #d4af37;
-            font-weight: 600;
-        }
-        .cursor-blink {
-            display: inline-block;
-            background: #d4af37;
-            width: 2px;
-            height: 1.2em;
-            margin-right: 4px;
-            vertical-align: middle;
-            animation: blink 0.8s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .description {
-            font-size: 1.1em;
-            color: #c0c0c0;
-            margin-bottom: 25px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
         }
         .highlight {
             color: #d4af37;
-            font-weight: 600;
+            font-weight: bold;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        h2 {
+            color: #d4af37;
+            margin: 30px 0 20px;
+        }
+        .list {
+            list-style: none;
+            display: inline-block;
+            text-align: right;
+            margin-bottom: 30px;
+        }
+        .list li {
+            margin: 12px 0;
+            font-size: 1.1em;
+            color: #c0c0c0;
+        }
+        .list li::before {
+            content: "▹ ";
+            color: #d4af37;
         }
         .btn {
             display: inline-block;
@@ -154,255 +98,51 @@
             border-radius: 30px;
             text-decoration: none;
             margin: 10px 8px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
+            transition: 0.3s;
         }
         .btn:hover {
             background: #d4af37;
             color: #0a0a0a;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212,175,55,0.3);
-        }
-        .badge {
-            background: #d4af37;
-            color: #0a0a0a;
-            font-size: 0.7em;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 12px;
-            margin-right: 8px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .visitor-count {
-            margin-top: 25px;
-            font-size: 0.95em;
-            color: #888;
-        }
-        .visitor-count span {
-            color: #d4af37;
-            font-weight: bold;
         }
         .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #777;
+            margin-top: 40px;
+            color: #666;
         }
-        .footer span {
-            color: #d4af37;
-        }
+        .footer span { color: #d4af37; }
     </style>
 </head>
 <body>
-    <!-- خلفية شبكية متحركة -->
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- شريط تنقل -->
     <nav>
-        <a href="index.html" class="active">🏠 الرئيسية</a>
+        <a href="index.html" style="color: #d4af37;">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
-        <a href="https://files.tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
-        <a href="http://tmmamtech.blogspot.com" target="_blank">📰 المدونة</a>
+        <a href="https://files.tmmamtech.xyz">☁️ استضافة الملفات</a>
+        <a href="https://blog.tmmamtech.xyz">📰 المدونة</a>
     </nav>
 
-    <!-- محتوى -->
-    <div class="main-content">
-        <div class="container">
-            <img src="tech-logo.png" alt="شعار تمام للتقنية" class="avatar">
+    <div class="container">
+        <img src="tech-logo.png" alt="تمام للتقنية" class="avatar">
+        <h1>تمام للتقنية</h1>
+        <p class="subtitle">tmmam tech</p>
+        <div class="line"></div>
 
-            <h1>تمام للتقنية</h1>
-            <div class="subtitle">tmmam tech</div>
-            <div class="line"></div>
+        <p class="description">
+            هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
+        </p>
 
-            <!-- عنوان متحرك -->
-            <div class="typing-box">
-                <span class="typing-text" id="typingText"></span>
-                <span class="cursor-blink"></span>
-            </div>
+        <h2>💡 ماذا أقدّم؟</h2>
+        <ul class="list">
+            <li>تجارب ونصائح في البرامج والتطبيقات</li>
+            <li>محتوى تقني نادر ومفيد</li>
+            <li>رحلة تعلم ومشاركة مستمرة</li>
+        </ul>
 
-            <p class="description">
-                هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
-            </p>
+        <a href="about.html" class="btn">من أنا؟</a>
+        <a href="links.html" class="btn">روابط التواصل</a>
 
-            <a href="about.html" class="btn">من أنا؟</a>
-            <a href="links.html" class="btn">
-                روابط التواصل
-                <span class="badge">جديد</span>
-            </a>
-
-            <div class="visitor-count">
-                👁️ أنت الزائر رقم <span id="visitCount">0</span> لهذا الموقع
-            </div>
-
-            <div class="footer">
-                تصميم — <span>tmmam تمام ❤️</span>
-            </div>
+        <div class="footer">
+            تصميم — <span>tmmam تمام</span>
         </div>
     </div>
-
-    <!-- سكريبتات -->
-    <script>
-        // ===== خلفية شبكية متحركة =====
-        (function() {
-            const canvas = document.getElementById("bg-canvas");
-            const ctx = canvas.getContext("2d");
-            let w, h;
-            const particles = [];
-            const particleCount = 60;
-
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
-            window.addEventListener("resize", resize);
-            resize();
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    r: Math.random() * 1.5 + 0.5
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, w, h);
-                ctx.strokeStyle = "#d4af37";
-                ctx.fillStyle = "rgba(212,175,55,0.3)";
-                ctx.lineWidth = 0.5;
-
-                // رسم خطوط بين الجسيمات المتجاورة
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.globalAlpha = 0.08 * (1 - dist / 120);
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                ctx.globalAlpha = 1;
-
-                // تحريك ورسم الجسيمات
-                particles.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0 || p.x > w) p.vx *= -1;
-                    if (p.y < 0 || p.y > h) p.vy *= -1;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                requestAnimationFrame(draw);
-            }
-            draw();
-        })();
-
-        // ===== تأثير كتابة العنوان =====
-        (function() {
-            const words = [
-                "رحلة شغف وإبداع في عالم التقنية.",
-                "تجارب ونصائح في البرامج والتطبيقات.",
-                "هنا تبدأ الرحلة نحو التعلم والمشاركة المستمرة.",
-                "محتوى تقني نادر ومفيد."
-            ];
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            const typingSpeed = 50;
-            const deletingSpeed = 30;
-            const pauseBetween = 2500;
-            const span = document.getElementById("typingText");
-
-            function type() {
-                const currentWord = words[wordIndex];
-
-                if (isDeleting) {
-                    span.textContent = currentWord.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    span.textContent = currentWord.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-
-                let timeout;
-                if (!isDeleting && charIndex === currentWord.length) {
-                    timeout = pauseBetween;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length;
-                    timeout = 300;
-                } else {
-                    timeout = isDeleting ? deletingSpeed : typingSpeed;
-                }
-
-                setTimeout(type, timeout);
-            }
-            type();
-        })();
-<!-- hitwebcounter Code START -->
-<a href="https://www.hitwebcounter.com/work-hours-calculator" target="_blank" rel="noopener" title="Counter Hours">
-<img src="https://www.hitwebcounter.com/counter/counter.php?page=21506030&amp;style=0010&amp;nbdigits=5&amp;type=ip" alt="Counter Hours" decoding="async" style="border:0;max-width:100%;height:auto;" />
-</a>
-<br />
-<a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" style="font-family:Arial, Helvetica, sans-serif;font-size:9px;color:#736C65;text-decoration:none;font-weight:em;">WebVisitors</a>
-<!-- hitwebcounter Code END -->
-        // ===== عداد الزوار =====
-        (function() {
-            const countSpan = document.getElementById("visitCount");
-            let count = localStorage.getItem("tmmam_visits");
-            if (!count) {
-                count = 1;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem("tmmam_visits", count);
-            countSpan.textContent = count;
-        })();
-    </script>
 </body>
 </html>
-<div id="latest-post" style="margin: 40px auto; max-width: 600px; text-align: right; background: #111; border: 1px solid #2a2a2a; border-radius: 12px; padding: 20px;">
-    <h3 style="color: #d4af37; margin-bottom: 15px;">📰 أحدث مقال من المدونة</h3>
-    <p id="latest-post-message" style="color: #888;">⏳ لا توجد مقالات بعد. ترقبوا القادم!</p>
-    <a id="latest-post-link" href="#" style="color: #f1f1f1; text-decoration: none; font-size: 1.2em; display: none;"></a>
-    <p id="latest-post-date" style="color: #888; margin-top: 10px; display: none;"></p>
-</div>
-
-<script>
-fetch('https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=1')
-  .then(response => response.json())
-  .then(data => {
-    if (data.feed && data.feed.entry) {
-      const entry = data.feed.entry[0];
-      const title = entry.title.$t;
-      const link = entry.link.find(l => l.rel === 'alternate').href;
-      const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
-      
-      document.getElementById('latest-post-message').style.display = 'none';
-      const linkEl = document.getElementById('latest-post-link');
-      linkEl.href = link;
-      linkEl.textContent = '📄 ' + title;
-      linkEl.style.display = 'inline';
-      const dateEl = document.getElementById('latest-post-date');
-      dateEl.textContent = '📅 ' + date;
-      dateEl.style.display = 'block';
-    }
-  })
-  .catch(err => console.error('Error fetching posts:', err));
-</script>
