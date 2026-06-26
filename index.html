@@ -179,7 +179,103 @@
         }
         type();
     </script>
-</body>
+</body><!-- ========== العداد الذهبي النابض (عداد محلي) ========== -->
+<style>
+    .tmmam-counter-wrapper {
+        text-align: center;
+        margin: 40px auto;
+        padding: 0 15px;
+    }
+    .tmmam-counter-box {
+        display: inline-block;
+        background: #0a0a0a;
+        border: 2px solid #d4af37;
+        border-radius: 20px;
+        padding: 25px 25px;
+        box-shadow: 0 0 30px rgba(212,175,55,0.25);
+        animation: goldenPulse 2.5s infinite;
+        position: relative;
+        overflow: hidden;
+        max-width: 350px;
+        width: 100%;
+    }
+    .tmmam-counter-box::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+        animation: rotateGlow 6s linear infinite;
+    }
+    @keyframes goldenPulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        50% { box-shadow: 0 0 40px rgba(212,175,55,0.6); }
+    }
+    @keyframes rotateGlow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .counter-title {
+        position: relative;
+        z-index: 2;
+        color: #d4af37;
+        font-size: 1em;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+    .counter-number {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        font-size: 2.8em;
+        font-weight: bold;
+        margin: 5px 0;
+        transition: transform 0.2s ease;
+    }
+    .counter-label {
+        position: relative;
+        z-index: 2;
+        color: #888;
+        font-size: 0.85em;
+    }
+    @media (max-width: 480px) {
+        .tmmam-counter-box {
+            padding: 20px 15px;
+        }
+        .counter-number {
+            font-size: 2.2em;
+        }
+    }
+</style>
+
+<div class="tmmam-counter-wrapper">
+    <div class="tmmam-counter-box">
+        <div class="counter-title">👁️ أنت الزائر رقم</div>
+        <div class="counter-number" id="tmmam-visit-count">0</div>
+        <div class="counter-label">في موقع تمام للتقنية</div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var span = document.getElementById("tmmam-visit-count");
+    if (!span) return;
+    var key = "tmmam_visits_home";
+    var count = localStorage.getItem(key);
+    if (!count) {
+        count = 1;
+    } else {
+        count = parseInt(count) + 1;
+    }
+    localStorage.setItem(key, count);
+    span.textContent = count;
+    span.style.transform = "scale(1.4)";
+    setTimeout(function() {
+        span.style.transform = "scale(1)";
+    }, 300);
+})();
+</script>
 </html>
-tmmam_visits_home
 </script>
