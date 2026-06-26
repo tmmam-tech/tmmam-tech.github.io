@@ -17,7 +17,6 @@
             background: #111;
             border-bottom: 1px solid #2a2a2a;
             padding: 15px 0;
-            text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -51,7 +50,7 @@
         h1 {
             font-size: 2.8em;
             color: #d4af37;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .subtitle {
             font-size: 1.2em;
@@ -88,35 +87,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-        .description {
-            font-size: 1.3em;
-            color: #d0d0d0;
-            margin-bottom: 18px;
-            line-height: 1.8;
-        }
-        .highlight {
-            color: #d4af37;
-            font-weight: bold;
-        }
-        h2 {
-            color: #d4af37;
-            margin: 30px 0 20px;
-        }
-        .list {
-            list-style: none;
-            display: inline-block;
-            text-align: right;
-            margin-bottom: 30px;
-        }
-        .list li {
-            margin: 12px 0;
-            font-size: 1.1em;
-            color: #c0c0c0;
-        }
-        .list li::before {
-            content: "▹ ";
-            color: #d4af37;
-        }
         .btn {
             display: inline-block;
             background: transparent;
@@ -136,6 +106,7 @@
         .footer {
             margin-top: 40px;
             color: #666;
+            font-size: 0.9em;
         }
         .footer span { color: #d4af37; }
     </style>
@@ -155,50 +126,36 @@
         <p class="subtitle">tmmam tech</p>
         <div class="line"></div>
 
-        <!-- التأثير الكتابي الحيوي -->
+        <!-- التأثير الكتابي الحيوي يعرض الجمل التي تحبها -->
         <div class="typing-box">
             <span class="typing-text" id="typingText"></span>
             <span class="cursor-blink"></span>
         </div>
 
-        <p class="description">
-            هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
-        </p>
-
-        <h2>💡 ماذا أقدّم؟</h2>
-        <ul class="list">
-            <li>تجارب ونصائح في البرامج والتطبيقات</li>
-            <li>محتوى تقني نادر ومفيد</li>
-            <li>رحلة تعلم ومشاركة مستمرة</li>
-        </ul>
-
         <a href="about.html" class="btn">من أنا؟</a>
         <a href="links.html" class="btn">روابط التواصل</a>
 
         <div class="footer">
-            تصميم — <span>tmmam تمام</span>
+            تصميم — <span>tmmam تمام</span> ❤️
         </div>
     </div>
 
     <!-- سكريبت التأثير الكتابي -->
     <script>
+        // الجمل التي ستظهر بالتناوب (نفس الروح التي تحبها)
         const words = [
             "رحلة شغف وإبداع في عالم التقنية.",
-            "أكتبُ كوداً، أخطئ، أتعلّم، وأصنع مستقبلي.",
-            "هنا تبدأ الرحلة نحو الاحتراف في الويب.",
-            "مختبر تمام البرمجي - تجارب ودروس تقنية."
+            "هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات .",
+            "تجارب ونصائح في البرامج والتطبيقات.",
+            "رحلة تعلم ومشاركة مستمرة."
         ];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
-        const typingSpeed = 50;
-        const deletingSpeed = 30;
-        const pauseBetween = 2500;
         const span = document.getElementById("typingText");
 
         function type() {
             const currentWord = words[wordIndex];
-
             if (isDeleting) {
                 span.textContent = currentWord.substring(0, charIndex - 1);
                 charIndex--;
@@ -209,16 +166,15 @@
 
             let timeout;
             if (!isDeleting && charIndex === currentWord.length) {
-                timeout = pauseBetween;
+                timeout = 2500;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 wordIndex = (wordIndex + 1) % words.length;
                 timeout = 300;
             } else {
-                timeout = isDeleting ? deletingSpeed : typingSpeed;
+                timeout = isDeleting ? 30 : 50;
             }
-
             setTimeout(type, timeout);
         }
         type();
