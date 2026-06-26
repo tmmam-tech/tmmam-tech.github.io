@@ -265,6 +265,7 @@
                         const dist = Math.sqrt(dx * dx + dy * dy);
                         if (dist < 120) {
                             ctx.globalAlpha = 0.08 * (1 - dist / 120);
+                            
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
@@ -302,3 +303,25 @@
     </script>
 </body>
 </html>
+<script>
+// استخدم الرابط المباشر لـ InfinityFree
+const counterUrl = 'https://tmmamfiles.infinityfreeapp.com/counter.php';
+
+async function fetchCounter() {
+    try {
+        const response = await fetch(counterUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Network error');
+        const count = await response.text();
+        const span = document.getElementById('tmmam-visit-count');
+        if (span && count) {
+            span.textContent = count.trim();
+            span.style.transform = 'scale(1.4)';
+            setTimeout(() => { span.style.transform = 'scale(1)'; }, 300);
+        }
+    } catch (e) {
+        document.getElementById('tmmam-visit-count').textContent = '0';
+        console.error('Counter error:', e);
+    }
+}
+fetchCounter();
+</script>
