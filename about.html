@@ -220,10 +220,6 @@
                 <li>محتوى تقني نادر ومفيد</li>
                 <li>رحلة تعلم ومشاركة مستمرة</li>
             </ul>
-
-            <div class="visitor-count">
-                👁️ أنت الزائر رقم <span id="visitCount">0</span> لهذه الصفحة
-            </div>
             <div class="footer">
                 تصميم — <span>tmmam تمام ❤️</span>
             </div>
@@ -304,24 +300,123 @@
 </body>
 </html>
 <script>
-// استخدم الرابط المباشر لـ InfinityFree
-const counterUrl = 'https://tmmamfiles.infinityfreeapp.com/counter.php';
-
-async function fetchCounter() {
-    try {
-        const response = await fetch(counterUrl, { cache: 'no-store' });
-        if (!response.ok) throw new Error('Network error');
-        const count = await response.text();
-        const span = document.getElementById('tmmam-visit-count');
-        if (span && count) {
-            span.textContent = count.trim();
-            span.style.transform = 'scale(1.4)';
-            setTimeout(() => { span.style.transform = 'scale(1)'; }, 300);
-        }
-    } catch (e) {
-        document.getElementById('tmmam-visit-count').textContent = '0';
-        console.error('Counter error:', e);
+<!-- صندوق العداد الذهبي النهائي -->
+<style>
+    .tmmam-counter-wrapper {
+        text-align: center;
+        margin: 40px auto;
+        padding: 0 15px;
     }
-}
-fetchCounter();
+    .tmmam-counter-box {
+        display: inline-block;
+        background: #0a0a0a;
+        border: 2px solid #d4af37;
+        border-radius: 20px;
+        padding: 25px 25px;
+        box-shadow: 0 0 30px rgba(212,175,55,0.25);
+        animation: goldenPulse 2.5s infinite;
+        position: relative;
+        overflow: hidden;
+        max-width: 350px;
+        width: 100%;
+    }
+    .tmmam-counter-box::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+        animation: rotateGlow 6s linear infinite;
+    }
+    @keyframes goldenPulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        50% { box-shadow: 0 0 40px rgba(212,175,55,0.6); }
+    }
+    @keyframes rotateGlow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .counter-title {
+        position: relative;
+        z-index: 2;
+        color: #d4af37;
+        font-size: 1em;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+    .counter-number {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        font-size: 2.8em;
+        font-weight: bold;
+        margin: 5px 0;
+        transition: transform 0.2s ease;
+    }
+    .counter-label {
+        position: relative;
+        z-index: 2;
+        color: #888;
+        font-size: 0.85em;
+    }
+    @media (max-width: 480px) {
+        .tmmam-counter-box {
+            padding: 20px 15px;
+        }
+        .counter-number {
+            font-size: 2.2em;
+        }
+    }
+</style>
+
+<div class="tmmam-counter-wrapper">
+    <div class="tmmam-counter-box">
+        <div class="counter-title">👁️ أنت الزائر رقم</div>
+        <div class="counter-number" id="tmmam-visit-count">0</div>
+        <div class="counter-label">في موقع تمام للتقنية</div>
+    </div>
+</div>
+
+<script>
+    const span = document.getElementById('tmmam-visit-count');
+    // نحاول أولاً جلب الرقم من CountAPI (العداد الحقيقي الموحد)
+    const API_URL = 'https://api.countapi.xyz/hit/tmmamtech.xyz/visits';
+
+    async function tryCountAPI() {
+        try {
+            const response = await fetch(API_URL, { cache: 'no-store' });
+            if (response.ok) {
+                const data = await response.json();
+                return data.value; // نجحنا
+            }
+        } catch (e) {}
+        return null; // فشل
+    }
+
+    function useLocalCounter() {
+        let count = localStorage.getItem('tmmam_visits_home');
+        if (!count) {
+            count = 1;
+        } else {
+            count = parseInt(count) + 1;
+        }
+        localStorage.setItem('tmmam_visits_home', count);
+        return count;
+    }
+
+    async function updateCounter() {
+        let count = await tryCountAPI(); // يحاول الرابط الخارجي
+        if (count === null) {
+            // إذا فشل، يستخدم العداد المحلي (لن يخذلك أبداً)
+            count = useLocalCounter();
+        }
+        span.textContent = count;
+        // تأثير الترحيب
+        span.style.transform = 'scale(1.4)';
+        setTimeout(() => { span.style.transform = 'scale(1)'; }, 300);
+    }
+
+    updateCounter();
 </script>
