@@ -42,6 +42,11 @@
             object-fit: cover;
             border: 3px solid #d4af37;
             margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
         h1 {
             font-size: 2.8em;
@@ -58,6 +63,30 @@
             height: 2px;
             background: #d4af37;
             margin: 0 auto 30px;
+        }
+        /* التأثير الكتابي */
+        .typing-box {
+            font-size: 1.4em;
+            color: #d0d0d0;
+            margin-bottom: 25px;
+            min-height: 2em;
+        }
+        .typing-text {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .cursor-blink {
+            display: inline-block;
+            background: #d4af37;
+            width: 2px;
+            height: 1.2em;
+            margin-right: 4px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
         .description {
             font-size: 1.3em;
@@ -126,6 +155,12 @@
         <p class="subtitle">tmmam tech</p>
         <div class="line"></div>
 
+        <!-- التأثير الكتابي الحيوي -->
+        <div class="typing-box">
+            <span class="typing-text" id="typingText"></span>
+            <span class="cursor-blink"></span>
+        </div>
+
         <p class="description">
             هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.
         </p>
@@ -144,5 +179,49 @@
             تصميم — <span>tmmam تمام</span>
         </div>
     </div>
+
+    <!-- سكريبت التأثير الكتابي -->
+    <script>
+        const words = [
+            "رحلة شغف وإبداع في عالم التقنية.",
+            "أكتبُ كوداً، أخطئ، أتعلّم، وأصنع مستقبلي.",
+            "هنا تبدأ الرحلة نحو الاحتراف في الويب.",
+            "مختبر تمام البرمجي - تجارب ودروس تقنية."
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 50;
+        const deletingSpeed = 30;
+        const pauseBetween = 2500;
+        const span = document.getElementById("typingText");
+
+        function type() {
+            const currentWord = words[wordIndex];
+
+            if (isDeleting) {
+                span.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                span.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let timeout;
+            if (!isDeleting && charIndex === currentWord.length) {
+                timeout = pauseBetween;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                timeout = 300;
+            } else {
+                timeout = isDeleting ? deletingSpeed : typingSpeed;
+            }
+
+            setTimeout(type, timeout);
+        }
+        type();
+    </script>
 </body>
 </html>
