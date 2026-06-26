@@ -259,43 +259,21 @@
 </div>
 
 <script>
-    const span = document.getElementById('tmmam-visit-count');
-    // نحاول أولاً جلب الرقم من CountAPI (العداد الحقيقي الموحد)
-    const API_URL = 'https://api.countapi.xyz/hit/tmmamtech.xyz/visits';
-
-    async function tryCountAPI() {
-        try {
-            const response = await fetch(API_URL, { cache: 'no-store' });
-            if (response.ok) {
-                const data = await response.json();
-                return data.value; // نجحنا
-            }
-        } catch (e) {}
-        return null; // فشل
-    }
-
-    function useLocalCounter() {
-        let count = localStorage.getItem('tmmam_visits_home');
+    (function() {
+        const span = document.getElementById("tmmam-visit-count");
+        if (!span) return;
+        // استخدم مفتاحاً موحداً لكل صفحة إن أردت، أو واحداً لجميع الصفحات
+        const storageKey = "tmmam_visits_home"; 
+        let count = localStorage.getItem(storageKey);
         if (!count) {
             count = 1;
         } else {
             count = parseInt(count) + 1;
         }
-        localStorage.setItem('tmmam_visits_home', count);
-        return count;
-    }
-
-    async function updateCounter() {
-        let count = await tryCountAPI(); // يحاول الرابط الخارجي
-        if (count === null) {
-            // إذا فشل، يستخدم العداد المحلي (لن يخذلك أبداً)
-            count = useLocalCounter();
-        }
+        localStorage.setItem(storageKey, count);
         span.textContent = count;
-        // تأثير الترحيب
-        span.style.transform = 'scale(1.4)';
-        setTimeout(() => { span.style.transform = 'scale(1)'; }, 300);
-    }
-
-    updateCounter();
+        // تأثير بسيط
+        span.style.transform = "scale(1.4)";
+        setTimeout(() => { span.style.transform = "scale(1)"; }, 300);
+    })();
 </script>
