@@ -251,101 +251,157 @@
             resize();
             for (let i = 0; i < particleCount; i++) {
                 <script>
-<!-- صندوق العداد الذهبي (عداد محلي يعمل دائماً) -->
+ <!-- ========== سلايدر أحدث المقالات من المدونة ========== -->
 <style>
-    .tmmam-counter-wrapper {
-        text-align: center;
+    .posts-slider-wrapper {
+        max-width: 600px;
         margin: 40px auto;
-        padding: 0 15px;
+        text-align: center;
     }
-    .tmmam-counter-box {
-        display: inline-block;
-        background: #0a0a0a;
-        border: 2px solid #d4af37;
-        border-radius: 20px;
-        padding: 25px 25px;
-        box-shadow: 0 0 30px rgba(212,175,55,0.25);
-        animation: goldenPulse 2.5s infinite;
+    .posts-slider-title {
+        color: #d4af37;
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+    .posts-slider {
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 16px;
+        padding: 25px;
+        min-height: 120px;
         position: relative;
         overflow: hidden;
-        max-width: 350px;
-        width: 100%;
+        box-shadow: 0 0 20px rgba(212,175,55,0.15);
     }
-    .tmmam-counter-box::before {
-        content: "";
+    .post-slide {
+        opacity: 0;
+        transition: opacity 0.6s ease;
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
-        animation: rotateGlow 6s linear infinite;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
     }
-    @keyframes goldenPulse {
-        0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.3); }
-        50% { box-shadow: 0 0 40px rgba(212,175,55,0.6); }
-    }
-    @keyframes rotateGlow {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    .counter-title {
+    .post-slide.active {
+        opacity: 1;
         position: relative;
-        z-index: 2;
-        color: #d4af37;
-        font-size: 1em;
-        margin-bottom: 8px;
-        letter-spacing: 1px;
     }
-    .counter-number {
-        position: relative;
-        z-index: 2;
-        color: #fff;
-        font-size: 2.8em;
+    .post-slide-title {
+        font-size: 1.3em;
         font-weight: bold;
-        margin: 5px 0;
-        transition: transform 0.2s ease;
+        margin-bottom: 8px;
     }
-    .counter-label {
-        position: relative;
-        z-index: 2;
+    .post-slide-title a {
+        color: #d4af37;
+        text-decoration: none;
+    }
+    .post-slide-title a:hover {
+        text-decoration: underline;
+    }
+    .post-slide-date {
         color: #888;
         font-size: 0.85em;
+        margin-bottom: 6px;
     }
-    @media (max-width: 480px) {
-        .tmmam-counter-box {
-            padding: 20px 15px;
-        }
-        .counter-number {
-            font-size: 2.2em;
-        }
+    .post-slide-snippet {
+        color: #b0b0b0;
+        font-size: 0.95em;
+        line-height: 1.6;
+    }
+    .slider-nav {
+        margin-top: 15px;
+    }
+    .slider-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #2a2a2a;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .slider-dot.active-dot {
+        background: #d4af37;
     }
 </style>
 
-<div class="tmmam-counter-wrapper">
-    <div class="tmmam-counter-box">
-        <div class="counter-title">👁️ أنت الزائر رقم</div>
-        <div class="counter-number" id="tmmam-visit-count">0</div>
-        <div class="counter-label">في موقع تمام للتقنية</div>
-    </div>
+<div class="posts-slider-wrapper">
+    <div class="posts-slider-title">📰 أحدث المقالات من المدونة</div>
+    <div class="posts-slider" id="posts-slider"></div>
+    <div class="slider-nav" id="slider-nav"></div>
 </div>
 
 <script>
-    (function() {
-        const span = document.getElementById("tmmam-visit-links");
-        if (!span) return;
-        // استخدم مفتاحاً موحداً لكل صفحة إن أردت، أو واحداً لجميع الصفحات
-        const storageKey = "tmmam_visits_home"; 
-        let count = localStorage.getItem(storageKey);
-        if (!count) {
-            count = 1;
-        } else {
-            count = parseInt(count) + 1;
+    const feedURL = 'https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=5';
+    const sliderContainer = document.getElementById('posts-slider');
+    const navContainer = document.getElementById('slider-nav');
+
+    async function loadPosts() {
+        try {
+            const response = await fetch(feedURL);
+            if (!response.ok) throw new Error('Network error');
+            const data = await response.json();
+            const entries = data.feed.entry || [];
+            if (entries.length === 0) {
+                sliderContainer.innerHTML = '<p style="color:#888;">لا توجد مقالات بعد.</p>';
+                return;
+            }
+
+            // إعداد الشرائح
+            entries.forEach((entry, index) => {
+                const title = entry.title.$t;
+                const link = entry.link.find(l => l.rel === 'alternate').href;
+                const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
+                // استخراج المقتطف (قد يكون في summary أو content)
+                let snippet = '';
+                if (entry.summary) {
+                    snippet = entry.summary.$t.replace(/<[^>]+>/g, '').substring(0, 120) + '...';
+                }
+                const slide = document.createElement('div');
+                slide.className = `post-slide ${index === 0 ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <div class="post-slide-title"><a href="${link}" target="_blank">${title}</a></div>
+                    <div class="post-slide-date">📅 ${date}</div>
+                    <div class="post-slide-snippet">${snippet}</div>
+                `;
+                sliderContainer.appendChild(slide);
+
+                // نقطة التنقل
+                const dot = document.createElement('span');
+                dot.className = `slider-dot ${index === 0 ? 'active-dot' : ''}`;
+                dot.addEventListener('click', () => goToSlide(index));
+                navContainer.appendChild(dot);
+            });
+
+            // بدء السلايدر التلقائي
+            if (entries.length > 1) {
+                let current = 0;
+                setInterval(() => {
+                    const next = (current + 1) % entries.length;
+                    goToSlide(next);
+                }, 5000);
+            }
+        } catch (e) {
+            sliderContainer.innerHTML = '<p style="color:#888;">تعذر تحميل المقالات حالياً.</p>';
+            console.error(e);
         }
-        localStorage.setItem(storageKey, count);
-        span.textContent = count;
-        // تأثير بسيط
-        span.style.transform = "scale(1.4)";
-        setTimeout(() => { span.style.transform = "scale(1)"; }, 300);
-    })();
+    }
+
+    function goToSlide(index) {
+        const slides = document.querySelectorAll('.post-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active-dot'));
+        if (slides[index]) slides[index].classList.add('active');
+        if (dots[index]) dots[index].classList.add('active-dot');
+    }
+
+    loadPosts();
 </script>
