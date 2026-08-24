@@ -1,347 +1,314 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تمام للتقنية | tmmam tech</title>
+    <!-- استدعاء خط ألكسندریا ليعطي طابعاً تقنياً مريحاً وعصرياً -->
+    <link href="https://googleapis.com" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* إعدادات المتغيرات والألوان النيونية والتقنية المريحة للعين */
+        :root {
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.07);
+            --primary-neon: #00f2fe;
+            --secondary-neon: #4facfe;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        /* تصفير الإعدادات الافتراضية للخطوط والهوامش */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alexandria', sans-serif;
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #f1f1f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
             text-align: center;
             min-height: 100vh;
         }
+
+        /* خلفية متوهجة ديناميكية تعطي عمقاً للموقع للمظهر المستقبلي */
+        .bg-glow {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* شريط التنقل الزجاجي المرن والمتوافق مع الأجهزة */
         nav {
-            background: #111;
-            border-bottom: 1px solid #2a2a2a;
-            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1.2rem 5%;
+            background: rgba(10, 11, 16, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
             z-index: 100;
+            gap: 15px;
         }
+
         nav a {
-            color: #e0e0e0;
+            color: var(--text-main);
             text-decoration: none;
-            margin: 0 14px;
+            margin: 0 10px;
             font-weight: 600;
-            transition: 0.3s;
+            font-size: 0.95rem;
+            transition: 0.3s ease;
         }
-        nav a:hover { color: #d4af37; }
+
+        nav a:hover {
+            color: var(--primary-neon);
+        }
+
+        /* حاوية المحتوى الرئيسية الوسطية */
         .container {
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 20px;
+            max-width: 750px;
+            margin: 60px auto;
+            padding: 0 20px;
         }
-        .avatar {
-            width: 110px;
-            height: 110px;
+
+        /* إعدادات الأفاتار (يعمل مع الصور والفيديوهات بشكل موحد) */
+        .avatar, .avatar-video {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #d4af37;
+            border: 3px solid var(--primary-neon);
             margin-bottom: 25px;
-            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.2);
+            animation: float 3.5s ease-in-out infinite;
         }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
         }
+
         h1 {
-            font-size: 2.8em;
-            color: #d4af37;
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
+
         .subtitle {
-            font-size: 1.2em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
-        .line {
-            width: 60px;
-            height: 2px;
-            background: #d4af37;
-            margin: 0 auto 30px;
-        }
-        /* التأثير الكتابي */
-        .typing-box {
-            font-size: 1.4em;
-            color: #d0d0d0;
+            font-size: 1.1rem;
+            color: var(--text-muted);
             margin-bottom: 25px;
-            min-height: 2em;
+            font-weight: 400;
         }
+
+        .line {
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+            margin: 0 auto 35px;
+            border-radius: 10px;
+        }
+
+        /* لوحة التأثير الكتابي المعززة زجاجياً */
+        .typing-box {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 35px;
+            min-height: 2.5rem;
+            line-height: 1.6;
+            padding: 10px 15px;
+        }
+
         .typing-text {
-            color: #d4af37;
+            color: var(--primary-neon);
             font-weight: 600;
         }
+
         .cursor-blink {
             display: inline-block;
-            background: #d4af37;
+            background: var(--primary-neon);
             width: 2px;
             height: 1.2em;
             margin-right: 4px;
             vertical-align: middle;
             animation: blink 0.8s infinite;
         }
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+
+        /* الأزرار التفاعلية الأنيقة وعريضة اللمس للـ Mobile */
         .btn {
             display: inline-block;
-            background: transparent;
-            border: 1.5px solid #d4af37;
-            color: #d4af37;
-            padding: 12px 32px;
-            font-size: 1.1em;
-            border-radius: 30px;
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border);
+            color: var(--text-main);
+            padding: 14px 36px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
             text-decoration: none;
             margin: 10px 8px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--secondary-neon), var(--primary-neon));
+            color: #000;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+        }
+
+        /* صندوق مقالات المدونة الإبداعي والمطوّر */
+        .blog-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 35px 25px;
+            margin: 50px auto 20px;
+            max-width: 550px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             transition: 0.3s;
         }
-        .btn:hover {
-            background: #d4af37;
-            color: #0a0a0a;
+
+        .blog-box:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.04);
         }
+
+        .blog-box p.title {
+            color: var(--primary-neon);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .blog-box p.desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-blog {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary-neon), var(--primary-neon));
+            color: #000;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-blog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        /* تذييل الصفحة الأنيق */
         .footer {
-            margin-top: 40px;
-            color: #666;
-            font-size: 0.9em;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 20px 0;
+            border-top: 1px solid var(--card-border);
         }
-        .footer span { color: #d4af37; }
+
+        .footer span {
+            color: var(--primary-neon);
+            font-weight: 600;
+        }
+
+        /* تجاوب تام وسلس مع الهواتف الذكية */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .typing-box { font-size: 1.1rem; }
+            .btn { width: 100%; margin: 8px 0; }
+            nav { padding: 1rem; gap: 10px; }
+            nav a { margin: 0 6px; font-size: 0.85rem; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- التوهج الخلفي المريح للعين -->
+    <div class="bg-glow"></div>
+
+    <!-- شريط التنقل المتكامل من القديم بتصميم عصري -->
     <nav>
-        <a href="index.html" style="color: #d4af37;">🏠 الرئيسية</a>
+        <a href="index.html" style="color: var(--primary-neon);">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
-        <a href="https://files.tmmamtech.xyz">☁️ استضافة الملفات</a>
-        <a href="https://blog.tmmamtech.xyz">📰 المدونة</a>
+        <a href="https://tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
+        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
     </nav>
 
     <div class="container">
-        <img src="tech-logo.png" alt="تمام للتقنية" class="avatar">
+        
+        <!-- 💡 الخيار الأول: إذا كنت تريد استخدام الشعار الثابت الذي أرسلته (قم بإزالة تعليق الكود بالأسفل واستخدمه) -->
+        <img src="image_IUbvnJ.png" alt="تمام للتقنية" class="avatar">
+
+        <!-- 💡 الخيار الثاني: لتشغيل الشعار المتحرك (فيديو)، احذف سطر <img> بالأعلى، وقم بتفعيل كود الـ <video> أدناه بعد تسمية ملف الفيديو لديك بـ logo.mp4 ورفعه على GitHub -->
+        <!--
+        <video autoplay loop muted playsinline class="avatar-video">
+            <source src="logo.mp4" type="video/mp4">
+            المتصفح لا يدعم تشغيل الفيديو.
+        </video>
+        -->
+
         <h1>تمام للتقنية</h1>
         <p class="subtitle">tmmam tech</p>
         <div class="line"></div>
 
-        <!-- التأثير الكتابي الحيوي يعرض الجمل التي تحبها -->
+        <!-- سكريبت التأثير الكتابي بالنصوص الأربعة الخاصة بك -->
         <div class="typing-box">
             <span class="typing-text" id="typingText"></span>
             <span class="cursor-blink"></span>
         </div>
 
+        <!-- أزرار الإجراء السريع المستوحاة من كودك السابق -->
         <a href="about.html" class="btn">من أنا؟</a>
         <a href="links.html" class="btn">روابط التواصل</a>
 
+        <!-- قسم استعراض محتوى المدونة بتوزيع متقن ومريح للبصر -->
+        <div class="blog-box">
+            <p class="title">📰 أحدث المقالات من المدونة</p>
+            <p class="desc">تعرّف على أحدث الشروحات التقنية والنصائح الحصرية من مدونة تمام للتقنية بأسلوب مبسط وممتع.</p>
+            <a href="https://tmmamtech.xyz" target="_blank" class="btn-blog">📝 تصفح المدونة الآن</a>
+        </div>
+
+        <!-- التذييل مع الحفاظ التام على حقوقك والشغف المستمر -->
         <div class="footer">
             تصميم — <span>tmmam تمام</span> ❤️
         </div>
     </div>
 
-    <!-- سكريبت التأثير الكتابي -->
     <script>
-        // الجمل التي ستظهر بالتناوب (نفس الروح التي تحبها)
         const words = [
-            "رحلة شغف وإبداع في عالم التقنية.",
-            "هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات .",
-            "تجارب ونصائح في البرامج والتطبيقات.",
-            "رحلة تعلم ومشاركة مستمرة."
-        ];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const span = document.getElementById("typingText");
-
-        function type() {
-            const currentWord = words[wordIndex];
-            if (isDeleting) {
-                span.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                span.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let timeout;
-            if (!isDeleting && charIndex === currentWord.length) {
-                timeout = 2500;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                timeout = 300;
-            } else {
-                timeout = isDeleting ? 30 : 50;
-            }
-            setTimeout(type, timeout);
-        }
-        type();
-    </script>
-    <!-- ========== سلايدر أحدث المقالات من المدونة ========== -->
-<style>
-    .posts-slider-wrapper {
-        max-width: 600px;
-        margin: 40px auto;
-        text-align: center;
-    }
-    .posts-slider-title {
-        color: #d4af37;
-        font-size: 1.4em;
-        margin-bottom: 20px;
-    }
-    .posts-slider {
-        background: #111;
-        border: 1px solid #2a2a2a;
-        border-radius: 16px;
-        padding: 25px;
-        min-height: 120px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(212,175,55,0.15);
-    }
-    .post-slide {
-        opacity: 0;
-        transition: opacity 0.6s ease;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        text-align: center;
-    }
-    .post-slide.active {
-        opacity: 1;
-        position: relative;
-    }
-    .post-slide-title {
-        font-size: 1.3em;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    .post-slide-title a {
-        color: #d4af37;
-        text-decoration: none;
-    }
-    .post-slide-title a:hover {
-        text-decoration: underline;
-    }
-    .post-slide-date {
-        color: #888;
-        font-size: 0.85em;
-        margin-bottom: 6px;
-    }
-    .post-slide-snippet {
-        color: #b0b0b0;
-        font-size: 0.95em;
-        line-height: 1.6;
-    }
-    .slider-nav {
-        margin-top: 15px;
-    }
-    .slider-dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #2a2a2a;
-        border-radius: 50%;
-        margin: 0 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    .slider-dot.active-dot {
-        background: #d4af37;
-    }
-</style>
-
-<div style="margin: 40px auto; max-width: 500px; text-align: center;">
-    <div style="background: #111; border: 1px solid #d4af37; border-radius: 12px; padding: 30px;">
-        <p style="color: #d4af37; font-size: 1.3em; margin-bottom: 15px;">📰 أحدث المقالات من المدونة</p>
-        <p style="color: #b0b0b0; margin-bottom: 25px;">تعرّف على أحدث الشروحات التقنية والنصائح من مدونة تمام للتقنية.</p>
-        <a href="https://blog.tmmamtech.xyz" target="_blank" style="
-            display: inline-block;
-            background: #d4af37;
-            color: #0a0a0a;
-            padding: 14px 35px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: 0.3s;
-        ">📝 تصفح المدونة الآن</a>
-    </div>
-</div>
-
-<script>
-    const feedURL = 'https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=5';
-    const sliderContainer = document.getElementById('posts-slider');
-    const navContainer = document.getElementById('slider-nav');
-
-    async function loadPosts() {
-        try {
-            const response = await fetch(feedURL);
-            if (!response.ok) throw new Error('Network error');
-            const data = await response.json();
-            const entries = data.feed.entry || [];
-            if (entries.length === 0) {
-                sliderContainer.innerHTML = '<p style="color:#888;">لا توجد مقالات بعد.</p>';
-                return;
-            }
-
-            // إعداد الشرائح
-            entries.forEach((entry, index) => {
-                const title = entry.title.$t;
-                const link = entry.link.find(l => l.rel === 'alternate').href;
-                const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
-                // استخراج المقتطف (قد يكون في summary أو content)
-                let snippet = '';
-                if (entry.summary) {
-                    snippet = entry.summary.$t.replace(/<[^>]+>/g, '').substring(0, 120) + '...';
-                }
-                const slide = document.createElement('div');
-                slide.className = `post-slide ${index === 0 ? 'active' : ''}`;
-                slide.innerHTML = `
-                    <div class="post-slide-title"><a href="${link}" target="_blank">${title}</a></div>
-                    <div class="post-slide-date">📅 ${date}</div>
-                    <div class="post-slide-snippet">${snippet}</div>
-                `;
-                sliderContainer.appendChild(slide);
-
-                // نقطة التنقل
-                const dot = document.createElement('span');
-                dot.className = `slider-dot ${index === 0 ? 'active-dot' : ''}`;
-                dot.addEventListener('click', () => goToSlide(index));
-                navContainer.appendChild(dot);
-            });
-
-            // بدء السلايدر التلقائي
-            if (entries.length > 1) {
-                let current = 0;
-                setInterval(() => {
-                    const next = (current + 1) % entries.length;
-                    goToSlide(next);
-                }, 5000);
-            }
-        } catch (e) {
-            sliderContainer.innerHTML = '<p style="color:#888;">تعذر تحميل المقالات حالياً.</p>';
-            console.error(e);
-        }
-    }
-
-    function goToSlide(index) {
-        const slides = document.querySelectorAll('.post-slide');
-        const dots = document.querySelectorAll('.slider-dot');
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active-dot'));
-        if (slides[index]) slides[index].classList.add('active');
-        if (dots[index]) dots[index].classList.add('active-dot');
-    }
-
-    loadPosts();
-</script>
