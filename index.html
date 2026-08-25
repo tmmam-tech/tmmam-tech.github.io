@@ -273,10 +273,9 @@
 
     <div class="container">
         
-        <!-- 💡 الشعار المتحرك الاحترافي (فيديو) مجهز للعمل تلقائياً وبشكل متكرر وصامت تماماً -->
-        <!-- تأكد من تسمية ملف الفيديو بـ logo.mp4 ورفعه في نفس مجلد ملف index.html على جيت هوب -->
-        <video autoplay loop muted playsinline autoplay="autoplay" class="avatar-video">
-            <source src="logo.mp4" type="video/mp4">
+        <!-- 💡 تم تعديل اسم ملف الفيديو إلى tech-logo.mp4 ليعمل اللوجو المتحرك فوراً -->
+        <video autoplay loop muted playsinline class="avatar-video">
+            <source src="tech-logo.mp4" type="video/mp4">
             المتصفح لا يدعم تشغيل الفيديو.
         </video>
 
@@ -309,6 +308,12 @@
 
     <script>
         const words = [
-            "رحلة شغف وإبداع في عالم التقنية.",
+            "رحلة شغف وإداء في عالم التقنية.",
             "هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات .",
             "تجارب ونصائح في البرامج والتطبيقات.",
+            "رحلة تعلم ومشاركة مستمرة."
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
