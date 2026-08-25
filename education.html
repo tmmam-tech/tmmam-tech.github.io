@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة التعليمية الشاملة | تمام للتقنية</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #060b13;
+            color: #e2e8f0;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle at top right, rgba(0, 168, 204, 0.1), transparent 450px);
+        }
+
+        /* شريط التنقل العلوي المتناسق مع الرئيسية */
+        .navbar {
+            background: rgba(10, 20, 38, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 168, 204, 0.15);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            color: #00a8cc;
+            background: rgba(0, 168, 204, 0.1);
+        }
+
+        /* الحاوية الرئيسية للمكتبة */
+        .library-container {
+            background: rgba(10, 20, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 168, 204, 0.2);
+            border-radius: 24px;
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #00a8cc;
+            margin-bottom: 30px;
+        }
+
+        /* أزرار الفلترة والصفوف المحدثة (Tabs) */
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 168, 204, 0.2);
+            padding-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 168, 204, 0.3);
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: #00a8cc;
+            color: #060b13;
+            box-shadow: 0 0 15px rgba(0, 168, 204, 0.4);
+            border-color: #00a8cc;
+        }
+
+        /* شبكة عرض الكتب المفضلة */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            text-align: right;
+        }
+
+        /* بطاقة الكتاب الزجاجية التفاعلية */
+        .book-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        /* إخفاء الصفوف غير النشطة برمجياً وبنعومة */
+        .book-card.hidden {
+            display: none !important;
+        }
+
+        .book-card:hover {
+            border-color: rgba(0, 168, 204, 0.4);
+            background: rgba(0, 168, 204, 0.03);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-icon {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #00a8cc;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .book-info {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* زر تحميل الكتب الجذاب */
+        .download-btn {
+            background: rgba(0, 168, 204, 0.1);
+            border: 1px solid rgba(0, 168, 204, 0.5);
+            color: #00a8cc;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .download-btn:hover {
+            background: #00a8cc;
+            color: #060b13;
+            box-shadow: 0 0 15px rgba(0, 168, 204, 0.3);
+        }
+
+        .footer {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .footer span { color: #00a8cc; }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي المتناسق -->
+    <nav class="navbar">
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="about.html">👤 من أنا؟</a>
+        <a href="links.html">🔗 روابط</a>
+        <a href="education.html" class="active">📚 المكتبة</a>
+    </nav>
+
+    <!-- واجهة المكتبة الرئيسية -->
+    <div class="library-container">
+        <h1>المكتبة التعليمية الشاملة</h1>
+        <p class="subtitle">جميع الكتب المدرسية والملخصات الحصرية بين يديك</p>
+
+        <!-- فلتر تصفح الصفوف والمراحل -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="filterClass('all')">🌟 جميع الصفوف</button>
+            <button class="tab-btn" onclick="filterClass('grade10')">🛠️ الأول الثانوي المهني</button>
+            <button class="tab-btn" onclick="filterClass('grade11')">⚡ الثاني الثانوي المهني</button>
+            <button class="tab-btn" onclick="filterClass('grade12')">🚗 الثالث الثانوي (البكالوريا)</button>
+        </div>
+
+        <!-- شبكة الكتب -->
+        <div class="books-grid">
+            
+            <!-- مثال كتاب الصف العاشر -->
+            <div class="book-card" data-class="grade10">
+                <div>
+                    <div class="book-icon">⚙️</div>
+                    <h3 class="book-title">مبادئ ميكانيك السيارات</h3>
+                    <p class="book-info">كتاب الوزارة الرسمي للصف الأول الثانوي المهني، يغطي المبادئ الأساسية للمحركات والورش الميكانيكية.</p>
+                </div>
+                <a href="#" class="download-btn">📥 تحميل الكتاب (PDF)</a>
+            </div>
+
+            <!-- مثال كتاب الصف الحادي عشر -->
+            <div class="book-card" data-class="grade11">
+                <div>
+                    <div class="book-icon">🔋</div>
+                    <h3 class="book-title">كهرباء السيارات الأساسية</h3>
+                    <p class="book-info">كتاب الصف الثاني الثانوي المهني، يشرح المخططات الكهربائية، البطاريات، المقلع، وأنظمة الشحن.</p>
+                </div>
+                <a href="#" class="download-btn">📥 تحميل الكتاب (PDF)</a>
+            </div>
+
+            <!-- مثال كتاب البكالوريا -->
+            <div class="book-card" data-class="grade12">
+                <div>
+                    <div class="book-icon">💻</div>
+                    <h3 class="book-title">أنظمة التشخيص والحساسات</h3>
+                    <p class="book-info">كتاب الثالث الثانوي المهني الحصري، شرح كمبيوتر السيارة، حساسات الحقن الإلكتروني وكشف الأعطال.</p>
+                </div>
+                <a href="#" class="download-btn">📥 تحميل الكتاب (PDF)</a>
+            </div>
+
+            <!-- مثال ملخص للبكالوريا -->
+            <div class="book-card" data-class="grade12">
+                <div>
+                    <div class="book-icon">📝</div>
+                    <h3 class="book-title">ملخص الدوائر الكهربائية الشامل</h3>
+                    <p class="book-info">ملخص مكثف وهام جداً لإعداد الطلاب للامتحان النهائي في ميكانيك وكهرباء السيارات.</p>
+                </div>
+                <a href="#" class="download-btn">📥 تحميل الملخص (PDF)</a>
+            </div>
+
+        </div>
+
+        <div class="footer" style="margin-top: 50px;">
+            تصميم وتطوير — <span>tmmam تمام ❤️</span>
+        </div>
+    </div>
+
+    <!-- كود جافا سكريبت الذكي للفلترة الفورية دون تحميل الصفحة -->
+    <script>
+        function filterClass(className) {
+            // تحديث حالة الزر النشط
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // إخفاء أو إظهار الكتب بناءً على الصف المختار
+            const cards = document.querySelectorAll('.book-card');
+            cards.forEach(card => {
+                if (className === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    if (card.getAttribute('data-class') === className) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.addClassList.add('hidden');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
