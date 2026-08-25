@@ -25,16 +25,35 @@
             max-width: 700px;
             width: 100%;
         }
-        /* تعديل الإيموجي ليناسب الميكانيك والكهرباء والتقنية */
-        .emoji {
-            font-size: 4em;
+        
+        /* تصميم الحاوية الخاصة باللوجو المتحرك */
+        .logo-container {
             margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
         }
-        @keyframes float {
+        
+        /* استدعاء اللوجو الخاص بك وتطبيق حركة عائمة عليه */
+        .brand-logo {
+            width: 120px; /* يمكنك تعديل المقاس حسب رغبتك */
+            height: auto;
+            animation: floatLogo 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); /* توهج ذهبي خفيف خلف اللوجو */
+            transition: transform 0.3s ease;
+        }
+
+        /* حركات التفاعل عند تمرير الماوس فوق اللوجو */
+        .brand-logo:hover {
+            transform: scale(1.08) rotate(3s);
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+        }
+
+        /* أنيميشن الحركة العائمة */
+        @keyframes floatLogo {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-10px); }
         }
+
         h1 {
             font-size: 2.8em;
             font-weight: 700;
@@ -75,7 +94,7 @@
             font-size: 1.1em;
             border-radius: 30px;
             text-decoration: none;
-            margin: 10px 10px; /* ضبط المسافات بين الأزرار */
+            margin: 10px 10px;
             transition: 0.3s ease;
             font-weight: 500;
         }
@@ -83,7 +102,7 @@
             background: #d4af37;
             color: #0a0a0a;
         }
-        /* تأثير النبض للزر الجديد والمكتبة */
+        
         @keyframes pulse {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.8; }
@@ -101,8 +120,12 @@
 </head>
 <body>
     <div class="container">
-        <!-- تم دمج إيموجي السيارة والكهرباء والتقنية لتحديث المظهر البصري -->
-        <div class="emoji">💻⚡🚗</div>
+        
+        <!-- قسم اللوجو المحدث بدلاً من الإيموجي التقليدي -->
+        <div class="logo-container">
+            <img src="tech-logo.png" alt="Tmmam Tech Logo" class="brand-logo">
+        </div>
+
         <h1>تمام للتقنية</h1>
         <div class="subtitle">tmmam tech</div>
         <div class="line"></div>
@@ -113,7 +136,6 @@
             هنا تجدون شروحات <span class="highlight">ميكانيك وكهرباء السيارات</span>، البرامج الحديثة، والملخصات الحصرية لطلابنا.
         </p>
         
-        <!-- الأزرار المحدثة مع إضافة زر المكتبة التعليمية الجديد -->
         <a href="about.html" class="btn">من أنا؟</a>
         
         <a href="education.html" class="btn" style="border-color: #ffb703; color: #ffb703; animation: pulse 2s infinite;">
