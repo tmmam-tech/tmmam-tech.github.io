@@ -25,7 +25,7 @@
             background-image: radial-gradient(circle at top right, rgba(0, 168, 204, 0.1), transparent 450px);
         }
 
-        /* شريط التنقل العلوي المتناسق مع الرئيسية */
+        /* شريط التنقل العلوي المتناسق */
         .navbar {
             background: rgba(10, 20, 38, 0.7);
             backdrop-filter: blur(10px);
@@ -84,7 +84,7 @@
             margin-bottom: 30px;
         }
 
-        /* أزرار الفلترة والصفوف المحدثة (Tabs) */
+        /* أزرار الفلترة والصفوف (Tabs) */
         .tabs-container {
             display: flex;
             flex-wrap: wrap;
@@ -114,7 +114,7 @@
             border-color: #00a8cc;
         }
 
-        /* شبكة عرض الكتب المفضلة */
+        /* شبكة عرض الكتب */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -134,7 +134,7 @@
             transition: all 0.3s ease;
         }
 
-        /* إخفاء الصفوف غير النشطة برمجياً وبنعومة */
+        /* إخفاء الصفوف غير النشطة */
         .book-card.hidden {
             display: none !important;
         }
@@ -187,7 +187,7 @@
         }
 
         .footer {
-            margin-top: 5px;
+            margin-top: 50px;
             font-size: 0.85rem;
             color: #64748b;
         }
@@ -198,10 +198,12 @@
 
     <!-- شريط التنقل العلوي المتناسق -->
     <nav class="navbar">
-        <a href="index.html">🏠 الرئيسية</a>
-        <a href="about.html">👤 من أنا؟</a>
-        <a href="links.html">🔗 روابط</a>
-        <a href="education.html" class="active">📚 المكتبة</a>
+        <nav class="navbar">
+            <a href="index.html">🏠 الرئيسية</a>
+            <a href="about.html">👤 من أنا؟</a>
+            <a href="links.html">🔗 روابط</a>
+            <a href="education.html" class="active">📚 المكتبة</a>
+        </nav>
     </nav>
 
     <!-- واجهة المكتبة الرئيسية -->
@@ -211,10 +213,10 @@
 
         <!-- فلتر تصفح الصفوف والمراحل -->
         <div class="tabs-container">
-            <button class="tab-btn active" onclick="filterClass('all')">🌟 جميع الصفوف</button>
-            <button class="tab-btn" onclick="filterClass('grade10')">🛠️ الأول الثانوي المهني</button>
-            <button class="tab-btn" onclick="filterClass('grade11')">⚡ الثاني الثانوي المهني</button>
-            <button class="tab-btn" onclick="filterClass('grade12')">🚗 الثالث الثانوي (البكالوريا)</button>
+            <button class="tab-btn active" onclick="filterClass(event, 'all')">🌟 جميع الصفوف</button>
+            <button class="tab-btn" onclick="filterClass(event, 'grade10')">🛠️ الأول الثانوي المهني</button>
+            <button class="tab-btn" onclick="filterClass(event, 'grade11')">⚡ الثاني الثانوي المهني</button>
+            <button class="tab-btn" onclick="filterClass(event, 'grade12')">🚗 الثالث الثانوي (البكالوريا)</button>
         </div>
 
         <!-- شبكة الكتب -->
@@ -262,20 +264,20 @@
 
         </div>
 
-        <div class="footer" style="margin-top: 50px;">
+        <div class="footer">
             تصميم وتطوير — <span>tmmam تمام ❤️</span>
         </div>
     </div>
 
-    <!-- كود جافا سكريبت الذكي للفلترة الفورية دون تحميل الصفحة -->
+    <!-- كود جافا سكريبت المُصلح والمحدث للفلترة الفورية -->
     <script>
-        function filterClass(className) {
+        function filterClass(event, className) {
             // تحديث حالة الزر النشط
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // إخفاء أو إظهار الكتب بناءً على الصف المختار
+            // إخفاء أو إظهار الكتب بناءً على الصف المختار (تم إصلاح الخطأ هنا)
             const cards = document.querySelectorAll('.book-card');
             cards.forEach(card => {
                 if (className === 'all') {
@@ -284,7 +286,7 @@
                     if (card.getAttribute('data-class') === className) {
                         card.classList.remove('hidden');
                     } else {
-                        card.addClassList.add('hidden');
+                        card.classList.add('hidden'); // تم تصحيح الكود هنا
                     }
                 }
             });
