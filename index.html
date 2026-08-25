@@ -1,34 +1,141 @@
-<!-- استبدل زر التحميل القديم بهذا الجزء -->
-<a href="رابط_ملف_الـ_PDF_هنا" id="downloadLink" class="download-btn" onclick="startDownload(event)">تحميل الكتاب (PDF)</a>
-
-<script>
-function startDownload(event) {
-    const link = event.currentTarget;
-    
-    // إذا كان العداد قد انتهى مسبقاً، اسمح بالتحميل المباشر
-    if (link.classList.contains('ready')) {
-        return true;
-    }
-    
-    // منع التحميل الفوري لتشغيل العداد
-    event.preventDefault();
-    
-    let timeLeft = 5; // عدد الثواني
-    link.style.pointerEvents = 'none'; // تعطيل الضغط أثناء العد
-    link.style.background = 'linear-gradient(45deg, #555, #333)';
-    link.style.color = '#fff';
-    
-    const timer = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            link.innerText = "⚡ اضغط الآن للتحميل المباشر";
-            link.style.background = "linear-gradient(45deg, #00cb82, #27ae60)"; // لون أخضر للنجاح
-            link.style.pointerEvents = 'auto';
-            link.classList.add('ready');
-        } else {
-            link.innerText = `⏳ جاري تجهيز ملف السيارات... (${timeLeft})`;
-            timeLeft--;
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمام للتقنية | tmmam tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }, 1000);
-}
-</script>
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+        /* تعديل الإيموجي ليناسب الميكانيك والكهرباء والتقنية */
+        .emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .line {
+            width: 60px;
+            height: 2px;
+            background: #d4af37; /* لون ذهبي فاخر */
+            margin: 0 auto 30px;
+            border-radius: 1px;
+        }
+        .description {
+            font-size: 1.3em;
+            color: #d0d0d0;
+            margin-bottom: 18px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        .highlight {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            background: transparent;
+            border: 1.5px solid #d4af37;
+            color: #d4af37;
+            padding: 12px 32px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 10px 10px; /* ضبط المسافات بين الأزرار */
+            transition: 0.3s ease;
+            font-weight: 500;
+        }
+        .btn:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+        /* تأثير النبض للزر الجديد والمكتبة */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .footer span {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- تم دمج إيموجي السيارة والكهرباء والتقنية لتحديث المظهر البصري -->
+        <div class="emoji">💻⚡🚗</div>
+        <h1>تمام للتقنية</h1>
+        <div class="subtitle">tmmam tech</div>
+        <div class="line"></div>
+        <p class="description">
+            رحلة شغف وإبداع تدمج بين عالم التقنية الرقمية وهندسة السيارات.
+        </p>
+        <p class="description">
+            هنا تجدون شروحات <span class="highlight">ميكانيك وكهرباء السيارات</span>، البرامج الحديثة، والملخصات الحصرية لطلابنا.
+        </p>
+        
+        <!-- الأزرار المحدثة مع إضافة زر المكتبة التعليمية الجديد -->
+        <a href="about.html" class="btn">من أنا؟</a>
+        
+        <a href="education.html" class="btn" style="border-color: #ffb703; color: #ffb703; animation: pulse 2s infinite;">
+            📚 المكتبة والملخصات
+        </a>
+
+        <a href="links.html" class="btn">
+            روابط التواصل
+            <span style="
+                background: #d4af37;
+                color: #0a0a0a;
+                font-size: 0.7em;
+                font-weight: bold;
+                padding: 3px 8px;
+                border-radius: 12px;
+                margin-right: 8px;
+            ">جديد</span>
+        </a>
+        
+        <div class="footer">
+            تصميم وتطوير — <span>tmmam تمام ❤️</span>
+        </div>
+    </div>
+</body>
+</html>
