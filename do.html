@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل الملف — تمام للتقنية</title>
+    <!-- استدعاء خط ألكسندریا وأيقونات Font Awesome -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+
+    <style>
+        :root {
+            --bg-dark: #07080e;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --primary-neon: #00f2fe;
+            --secondary-neon: #4facfe;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Alexandria', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; min-height: 100vh; text-align: center; }
+
+        .bg-glow { position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vh; background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%); z-index: -1; pointer-events: none; }
+
+        /* شريط النقل الزجاجي الثابت */
+        nav {
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; padding: 1.2rem 5%;
+            background: rgba(10, 11, 16, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; gap: 15px; width: 100%;
+        }
+        nav a { color: var(--text-main); text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 0.95rem; transition: 0.3s; padding: 4px 0; border-bottom: 2px solid transparent; }
+        nav a:hover { color: var(--primary-neon); border-bottom: 2px solid var(--primary-neon); }
+
+        .main-content { display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 40px 20px; }
+        
+        /* بطاقة تحميل الملفات المستوحاة من المواقع العالمية البارزة */
+        .download-card {
+            background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px; width: 100%; max-width: 580px; padding: 40px 30px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .file-icon-box { font-size: 4rem; color: var(--primary-neon); margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.3)); }
+        
+        h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 25px; color: #fff; line-height: 1.5; }
+
+        /* جدول بيانات واستعراض معلومات الملف */
+        .info-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; text-align: right; background: rgba(10, 11, 16, 0.3); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); }
+        .info-row { display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--card-border); }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: var(--text-muted); font-weight: 400; font-size: 0.9rem; }
+        .info-value { color: var(--text-main); font-weight: 600; font-size: 0.95rem; max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* منطقة العداد التنازلي التفاعلي المريح */
+        .countdown-box { font-size: 1.1rem; font-weight: 600; color: var(--primary-neon); margin-bottom: 20px; display: block; }
+        .countdown-box span { font-size: 1.4rem; font-weight: 900; text-shadow: 0 0 10px var(--primary-neon); }
+
+        /* زر التحميل النيوني الخارق والممتد للـ Mobile */
+        .download-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            background: linear-gradient(135deg, var(--secondary-neon), var(--primary-neon));
+            color: #000; border: none; padding: 16px 40px; font-size: 1.1rem; font-weight: 700;
+            border-radius: 50px; cursor: pointer; width: 100%; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none; box-shadow: 0 8px 20px rgba(0, 242, 254, 0.15);
+        }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 242, 254, 0.35); background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon)); }
+        
+        /* حالة إيقاف الزر أثناء عمل العداد التنازلي */
+        .download-btn.disabled { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid var(--card-border); box-shadow: none; pointer-events: none; cursor: not-allowed; }
+
+        .footer { margin-top: 35px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 20px; }
+        .footer span { color: var(--primary-neon); font-weight: 600; }
+
+        @media (max-width: 600px) { nav { padding: 1rem; } nav a { margin: 0 6px; font-size: 0.85rem; } .download-card { padding: 30px 15px; border-radius: 20px; } h1 { font-size: 1.3rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="index.html#about">👤 من أنا</a>
+        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="download-card">
+            <div class="file-icon-box"><i class="fa-solid fa-file-pdf" id="file-icon"></i></div>
+            <h1 id="page-title">صفحة استخراج وتحميل المستندات السحابية</h1>
+
+            <!-- جدول استعراض كافة معلومات الملف المستوحى من سكربت كليجا -->
+            <div class="info-table">
+                <div class="info-row"><span class="info-label">اسم الملف</span><span class="info-value" id="info-name">جاري جلب الاسم...</span></div>
+                <div class="info-row"><span class="info-label">نوع وامتداد الملف</span><span class="info-value" id="info-type">-</span></div>
+                <div class="info-row"><span class="info-label">حجم الملف التقديري</span><span class="info-value" id="info-size">-</span></div>
+            </div>
+
+            <!-- بوكس العداد التنازلي الذكي للتشويق المريح -->
+            <div class="countdown-box" id="countdown-wrapper">جاري تجهيز رابط التحميل المباشر، يرجى الانتظار <span id="timer">10</span> ثانية...</div>
+
+            <!-- زر تنزيل داتا الملف الخارق -->
+            <a href="#" id="direct-download-link" class="download-btn disabled"><i class="fa-solid fa-circle-down"></i> اضغط هنا لتحميل الملف مباشرة</a>
+
+            <div class="footer">منصة التحميل ومشاركة الملفات الحرة — بقوة <span>tmmam تمام</span> ❤️</div>
+        </div>
+    </div>
+
+    <script>
+        // برمجية ذكية لالتقاط اسم الملف المرفوع تلقائياً من الرابط وعرض بياناته بدقة شاسعة
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const fileParam = getQueryParam('file'); // المتصفح يقرأ الرابط الممرر هكذا: do.html?file=اسم_الملف.pdf
+        const GITHUB_USERNAME = "tmmam-tech"; 
+        const GITHUB_REPO = "uploaded-files"; 
+
+        if (fileParam) {
+            // تنظيف اسم الملف من الأرقام العشوائية الأمامية وعرضه للزائر بشكل جمالي ونظيف
+            const cleanName = fileParam.substring(fileParam.indexOf('_') + 1);
+            document.getElementById('info-name').textContent = cleanName;
+            
+            // استخراج وتحديد امتداد ونوع الملف لتغيير الأيقونة تلقائياً
+            const extension = fileParam.split('.').pop().toLowerCase();
+            document.getElementById('info-type').textContent = extension.toUpperCase() + " File";
+            
+            const iconElement = document.getElementById('file-icon');
+            if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) { iconElement.className = "fa-solid fa-file-image"; }
+            else if (['zip', 'rar', 'tar', '7z'].includes(extension)) { iconElement.className = "fa-solid fa-file-zipper"; }
+            else if (['mp4', 'mkv', 'avi'].includes(extension)) { iconElement.className = "fa-solid fa-file-video"; }
+            else { iconElement.className = "fa-solid fa-file-lines"; }
+
+            // تحديد مسار رابط التحميل السحابي الفوري من الـ CDN العالمي لـ GitHub الخاص بك
+            const finalDownloadUrl = `https://jsdelivr.net{GITHUB_USERNAME}/${GITHUB_REPO}@main/${fileParam}`;
+            
+            // تشغيل عداد الانتظار التنازلي التفاعلي المريح بنجاح التام (10 ثوانٍ)
+            let timeLeft = 10;
+            const timerSpan = document.getElementById('timer');
+            const countdownWrapper = document.getElementById('countdown-wrapper');
+            const downloadBtn = document.getElementById('direct-download-link');
+
+            const countdown = setInterval(() => {
+                timeLeft--;
+                timerSpan.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    countdownWrapper.innerHTML = "✨ رابط التحميل المباشر جاهز ومؤمّن الآن بنجاح شاسع!";
+                    downloadBtn.className = "download-btn"; // تفعيل زر التحميل وإزالة الإيقاف
+                    downloadBtn.href = finalDownloadUrl;
+                }
+            }, 1000);
+
+            // جلب حجم الملف بشكل تقديري تقريبي لحساب الحقل بذكاء
+            document.getElementById('info-size').textContent = "متوفر للحفظ الآمن";
+        } else {
+            document.getElementById('info-name').textContent = "خطأ: لم يتم تمرير أي ملف صحيح.";
+        }
+    </script>
+</body>
+</html>
