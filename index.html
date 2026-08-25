@@ -129,60 +129,40 @@
             border-radius: 10px;
         }
 
-        /* 🌌 تصميم السلايدر التفاعلي الأنيق والمريح للعين 🌌 */
-        .slider-container {
+        /* 🌌 سلايدر نقي وحركي يعتمد بالكامل على الـ CSS لضمان العمل 100% 🌌 */
+        .pure-slider {
             max-width: 600px;
-            margin: 0 auto 35px;
+            margin: 0 auto 40px;
+            min-height: 60px;
             position: relative;
-            min-height: 80px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
-        .slide-text {
-            font-size: 1.25rem;
+        .pure-slide {
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary-neon);
             line-height: 1.6;
-            opacity: 0;
             position: absolute;
-            transform: translateY(15px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
             width: 100%;
-            pointer-events: none;
+            opacity: 0;
+            animation: slideAnimation 16s infinite ease-in-out;
         }
 
-        .slide-text.active {
-            opacity: 1;
-            position: relative;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
+        /* توقيت ذكي وموزع بالتساوي لكل جملة لتظهر وتختفي بسلاسة */
+        .pure-slide:nth-child(1) { animation-delay: 0s; }
+        .pure-slide:nth-child(2) { animation-delay: 4s; }
+        .pure-slide:nth-child(3) { animation-delay: 8s; }
+        .pure-slide:nth-child(4) { animation-delay: 12s; }
 
-        /* نقاط التحكم بالسلايدر في الأسفل */
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .dot.active {
-            background: var(--primary-neon);
-            transform: scale(1.2);
-            box-shadow: 0 0 8px var(--primary-neon);
+        @keyframes slideAnimation {
+            0% { opacity: 0; transform: translateY(10px); }
+            5% { opacity: 1; transform: translateY(0); }
+            20% { opacity: 1; transform: translateY(0); }
+            25% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 0; }
         }
 
         /* الأزرار التفاعلية الأنيقة وعريضة اللمس للـ Mobile */
@@ -276,7 +256,7 @@
         /* تجاوب تام وسلس مع الهواتف الذكية */
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
-            .slide-text { font-size: 1.1rem; }
+            .pure-slide { font-size: 1.1rem; }
             .btn { width: 100%; margin: 8px 0; }
             nav { padding: 1rem; gap: 10px; }
             nav a { margin: 0 6px; font-size: 0.85rem; }
@@ -293,13 +273,13 @@
         <a href="index.html" style="color: var(--primary-neon);">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
-        <a href="https://tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
-        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
+        <a href="https://files.tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
+        <a href="https://blog.tmmamtech.xyz" target="_blank">📰 المدونة</a>
     </nav>
 
     <div class="container">
         
-        <!-- الشعار المتحرك الاحترافي (فيديو) -->
+        <!-- الشعار المتحرك الاحترافي (فيديو) مجهز للعمل تلقائياً وبشكل متكرر وصامت تماماً -->
         <video autoplay loop muted playsinline class="avatar-video">
             <source src="tech-logo.mp4" type="video/mp4">
             المتصفح لا يدعم تشغيل الفيديو.
@@ -309,12 +289,18 @@
         <p class="subtitle">tmmam tech</p>
         <div class="line"></div>
 
-        <!-- 🚀 صندوق السلايدر التفاعلي الجديد كلياً بديل الكتابة 🚀 -->
-        <div class="slider-container">
-            <div class="slide-text active">رحلة شغف وإبداع في عالم التقنية.</div>
-            <div class="slide-text">هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات.</div>
-            <div class="slide-text">تجارب ونصائح في البرامج والتطبيقات.</div>
-            <div class="slide-text">رحلة تعلم ومشاركة مستمرة.</div>
-            
-            <!-- نقاط تحكم جمالية في الأسفل -->
-            <div class="slider-dots">
+        <!-- 🚀 الحاوية الحركية النقية والآمنة تماماً بدون جافاسكريبت 🚀 -->
+        <div class="pure-slider">
+            <div class="pure-slide">رحلة شغف وإبداع في عالم التقنية.</div>
+            <div class="pure-slide">هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات.</div>
+            <div class="pure-slide">تجارب ونصائح في البرامج والتطبيقات.</div>
+            <div class="pure-slide">رحلة تعلم ومشاركة مستمرة.</div>
+        </div>
+
+        <!-- أزرار الإجراء السريع المستوحاة من كودك السابق -->
+        <a href="about.html" class="btn">من أنا؟</a>
+        <a href="links.html" class="btn">روابط التواصل</a>
+
+        <!-- قسم استعراض محتوى المدونة بتوزيع متقن ومريح للبصر -->
+        <div class="blog-box">
+            <p class="title">📰 أحدث المقالات من المدونة</p>
