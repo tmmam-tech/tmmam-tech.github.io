@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>من أنا؟ — تمام للتقنية</title>
-    <!-- استدعاء خط ألكسندریا ليعطي طابعاً تقنياً مريحاً وعصرياً -->
+    <title>روابط — تمام للتقنية</title>
+    <!-- استدعاء خط ألكسندریا وأيقونات Font Awesome -->
     <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* إعدادات المتغيرات والألوان النيونية والتقنية المريحة للعين */
@@ -82,7 +83,7 @@
             border-bottom: 2px solid var(--primary-neon);
         }
 
-        /* حاوية المحتوى الرئيسية */
+        /* حاوية المحتوى الرئيسية الوسطية */
         .main-content {
             display: flex;
             justify-content: center;
@@ -94,11 +95,11 @@
         }
 
         .container {
-            max-width: 650px;
+            max-width: 500px;
             width: 100%;
         }
 
-        /* إعدادات اللوجو المتحرك (الفيديو) */
+        /* إعدادات اللوجو المتحرك (فيديو) الموحد */
         .avatar-video {
             width: 130px;
             height: 130px;
@@ -117,28 +118,28 @@
         }
 
         h1 {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             letter-spacing: 0.5px;
             opacity: 0;
             animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
-        .location {
-            font-size: 1.15rem;
+        .bio {
+            font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 400;
             opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
         .line {
-            width: 70px;
+            width: 60px;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
             margin: 0 auto 30px;
@@ -148,30 +149,7 @@
 
         @keyframes expandLine {
             from { width: 0; }
-            to { width: 70px; }
-        }
-
-        /* صندوق السيرة الذاتية الزجاجي والمريح جداً للعين */
-        .bio {
-            font-size: 1.15rem;
-            color: var(--text-main);
-            line-height: 2;
-            margin-bottom: 35px;
-            background: var(--card-bg);
-            padding: 30px 25px;
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.5s forwards;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .highlight {
-            color: var(--primary-neon);
-            font-weight: 600;
+            to { width: 60px; }
         }
 
         @keyframes fadeInUp {
@@ -179,40 +157,84 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .section-title {
-            font-size: 1.3rem;
-            color: var(--primary-neon);
-            margin: 25px 0 15px;
-            font-weight: 700;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
+        /* حاوية الأزرار العمودية */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        /* القائمة الإبداعية المحسنة بأسلوب مستقبلي */
-        .list {
-            list-style: none;
-            padding: 0;
-            text-align: right;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.8s forwards;
-        }
-
-        .list li {
-            font-size: 1.1rem;
+        /* تصميم أزرار الروابط الزجاجية المستقبلية */
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             color: var(--text-main);
-            margin: 14px 0;
-            padding-right: 25px;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
             position: relative;
         }
 
-        .list li::before {
-            content: "▹";
+        /* أنيميشن الظهور المتتابع للأزرار بسلاسة */
+        .link-btn:nth-child(1) { animation-delay: 0.4s; }
+        .link-btn:nth-child(2) { animation-delay: 0.5s; }
+        .link-btn:nth-child(3) { animation-delay: 0.6s; }
+        .link-btn:nth-child(4) { animation-delay: 0.7s; }
+        .link-btn:nth-child(5) { animation-delay: 0.8s; }
+        .link-btn:nth-child(6) { animation-delay: 0.9s; }
+        .link-btn:nth-child(7) { animation-delay: 1.0s; }
+
+        .link-btn i {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* تأثير التكبير والتدوير الطفيف للأيقونات عند التحويم */
+        .link-btn:hover i {
+            transform: scale(1.25) rotate(8deg);
+        }
+
+        /* 🌈 تأثيرات توهج نيونية مخصصة واحترافية عند التحويم بكل شبكة 🌈 */
+        .link-whatsapp:hover {
+            border-color: #25D366;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.25);
+            color: #25D366;
+        }
+        .link-instagram:hover {
+            border-color: #E1306C;
+            box-shadow: 0 0 20px rgba(225, 48, 108, 0.25);
+            color: #E1306C;
+        }
+        .link-facebook:hover {
+            border-color: #1877F2;
+            box-shadow: 0 0 20px rgba(24, 119, 242, 0.25);
+            color: #1877F2;
+        }
+        .link-telegram:hover {
+            border-color: #0088cc;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.25);
+            color: #0088cc;
+        }
+        .link-youtube:hover {
+            border-color: #FF0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+            color: #FF0000;
+        }
+        .link-globe:hover, .link-user:hover {
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
             color: var(--primary-neon);
-            position: absolute;
-            right: 0;
-            font-weight: bold;
-            text-shadow: 0 0 8px var(--primary-neon);
         }
 
         /* تذييل الصفحة */
@@ -223,7 +245,6 @@
             padding: 20px 0;
             border-top: 1px solid var(--card-border);
         }
-
         .footer span {
             color: var(--primary-neon);
             font-weight: 600;
@@ -231,9 +252,8 @@
 
         /* تجاوب تام وسلس مع الهواتف الذكية */
         @media (max-width: 600px) {
-            h1 { font-size: 2.1rem; }
-            .bio { font-size: 1rem; padding: 20px; }
-            .list li { font-size: 1rem; }
+            h1 { font-size: 2rem; }
+            .link-btn { padding: 13px 20px; font-size: 1rem; }
             nav { padding: 1rem; gap: 10px; }
             nav a { margin: 0 6px; font-size: 0.85rem; }
         }
@@ -247,72 +267,36 @@
     <!-- شريط التنقل المتكامل المتناسق برمجياً -->
     <nav>
         <a href="index.html">🏠 الرئيسية</a>
-        <a href="about.html" class="active">👤 من أنا؟</a>
-        <a href="links.html">🔗 روابط</a>
-        <a href="https://tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
-        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
+        <a href="about.html">👤 من أنا؟</a>
+        <a href="links.html" class="active">🔗 روابط</a>
+        <a href="https://files.tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
+        <a href="https://blog.tmmamtech.xyz" target="_blank">📰 المدونة</a>
     </nav>
 
     <div class="main-content">
         <div class="container">
-            <!-- الشعار المتحرك (فيديو) متناسق مع الواجهة الأساسية -->
+            <!-- الشعار المتحرك (فيديو) موحد بين جميع الصفحات لبناء هوية قوية -->
             <video autoplay loop muted playsinline class="avatar-video">
                 <source src="tech-logo.mp4" type="video/mp4">
                 المتصفح لا يدعم تشغيل الفيديو.
             </video>
             
             <h1>تمام</h1>
-            <div class="location">من سوريا</div>
+            <p class="bio">تمام للتقنية | tmmam tech</p>
             <div class="line"></div>
 
-            <div class="bio">
-                <p>أهلاً بك في <span class="highlight">تمام للتقنية</span>.</p>
-                <p>أنت في المكان الصحيح.</p>
-                <p>هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.</p>
-            </div>
-
-            <div class="section-title">💡 ماذا أقدّم؟</div>
-            <ul class="list">
-                <li>تجارب ونصائح في البرامج والتطبيقات</li>
-                <li>محتوى تقني نادر ومفيد</li>
-                <li>رحلة تعلم ومشاركة مستمرة</li>
-            </ul>
-            
-            <div class="footer">
-                تصميم — <span>tmmam تمام ❤️</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- سكريبت بناء وتحديث الشبكة النيونية المتحركة بدقة وثبات -->
-    <script>
-        (function() {
-            const canvas = document.getElementById("bg-canvas");
-            const ctx = canvas.getContext("2d");
-            let w, h;
-            const particles = [];
-            const particleCount = 45; // عدد جزيئات متزن لضمان السرعة والراحة البصرية
-            
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
-            window.addEventListener("resize", resize);
-            resize();
-            
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    r: Math.random() * 1.5 + 0.5
-                });
-            }
-            
-            function draw() {
-                ctx.clearRect(0, 0, w, h);
-                ctx.strokeStyle = "rgba(0, 242, 254, 0.08)";
-                ctx.fillStyle = "rgba(0, 242, 254, 0.3)";
-                ctx.lineWidth = 0.5;
-                
+            <div class="links">
+                <!-- واتساب -->
+                <a href="https://wa.me/963000000000" target="_blank" class="link-btn link-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> واتساب
+                </a>
+                <!-- إنستغرام -->
+                <a href="https://instagram.com/tmmamtech" target="_blank" class="link-btn link-instagram">
+                    <i class="fa-brands fa-instagram"></i> إنستغرام
+                </a>
+                <!-- فيسبوك -->
+                <a href="https://www.facebook.com/share/1GVcBV9ztw/" target="_blank" class="link-btn link-facebook">
+                    <i class="fa-brands fa-facebook"></i> فيسبوك
+                </a>
+                <!-- تلغرام -->
+                <a href="https://t.me/tmmamtech" target="_blank" class="link-btn link-telegram">
