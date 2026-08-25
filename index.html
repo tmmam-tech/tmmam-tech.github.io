@@ -100,8 +100,8 @@
         .upload-wrapper { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 40px 30px; max-width: 600px; margin: 0 auto; width: 100%; backdrop-filter: blur(16px); box-shadow: 0 25px 50px rgba(0,0,0,0.4); text-align: center; }
         .drop-zone { width: 100%; padding: 45px 20px; border: 2px dashed rgba(0, 242, 254, 0.2); border-radius: 18px; background: rgba(10, 11, 16, 0.4); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
         .drop-zone.drag-over { border-color: var(--primary-neon); background: rgba(0, 242, 254, 0.04); box-shadow: 0 0 20px rgba(0, 242, 254, 0.15); }
-        .drop-zone i.cloud-upload-icon { font-size: 3.8rem; color: var(--text-muted); margin-bottom: 15px; transition: 0.3s; }
-        .drop-zone:hover i.cloud-upload-icon { color: var(--primary-neon); transform: translateY(-4px); }
+        .cloud-upload-icon { font-size: 3.8rem; color: var(--text-muted); margin-bottom: 15px; transition: 0.3s; width: 65px; height: 65px; fill: var(--text-muted); }
+        .drop-zone:hover .cloud-upload-icon { fill: var(--primary-neon); transform: translateY(-4px); }
         
         .progress-container { margin-top: 25px; width: 100%; display: none; text-align: right; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); padding: 15px; border-radius: 12px; }
         .file-info { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #9ca3af; margin-bottom: 10px; }
@@ -110,6 +110,6 @@
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--secondary-neon), var(--primary-neon)); border-radius: 10px; box-shadow: 0 0 10px var(--primary-neon); }
 
         .result-container { margin-top: 25px; background: rgba(37, 211, 102, 0.02); border: 1px solid rgba(37, 211, 102, 0.15); padding: 20px 15px; border-radius: 14px; display: none; }
-        .result-container i.success-icon { color: var(--success-neon); font-size: 1.8rem; margin-bottom: 10px; }
+        .success-icon { fill: var(--success-neon); width: 35px; height: 30px; margin-bottom: 10px; }
         .link-box { display: flex; background: rgba(10, 11, 16, 0.6); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; margin-top: 10px; }
         .link-box input { flex-grow: 1; background: transparent; border: none; padding: 12px; color: var(--primary-neon); font-size: 0.9rem; text-align: left; direction: ltr; outline: none; }
