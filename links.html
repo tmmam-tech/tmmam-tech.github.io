@@ -1,22 +1,43 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روابط — تمام للتقنية</title>
-    <!-- أيقونات Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>من أنا؟ — تمام للتقنية</title>
+    <!-- استدعاء خط ألكسندریا ليعطي طابعاً تقنياً مريحاً وعصرياً -->
+    <link href="https://googleapis.com" rel="stylesheet">
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* إعدادات المتغيرات والألوان النيونية والتقنية المريحة للعين */
+        :root {
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.07);
+            --primary-neon: #00f2fe;
+            --secondary-neon: #4facfe;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        /* تصفير الإعدادات الافتراضية للخطوط والهوامش */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alexandria', sans-serif;
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #f1f1f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
             text-align: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
-        /* خلفية شبكية متحركة */
+
+        /* شبكة النيون المتحركة في الخلفية عبر الـ Canvas */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -24,31 +45,44 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.2;
+            opacity: 0.25;
             pointer-events: none;
         }
+
+        /* شريط التنقل الزجاجي المرن والمتوافق مع الأجهزة */
         nav {
-            background: rgba(17,17,17,0.9);
-            border-bottom: 1px solid #2a2a2a;
-            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1.2rem 5%;
+            background: rgba(10, 11, 16, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            gap: 15px;
         }
+
         nav a {
-            color: #e0e0e0;
+            color: var(--text-main);
             text-decoration: none;
-            margin: 0 14px;
+            margin: 0 10px;
             font-weight: 600;
-            transition: 0.3s;
-            padding: 8px 0;
+            font-size: 0.95rem;
+            transition: 0.3s ease;
+            padding: 4px 0;
             border-bottom: 2px solid transparent;
         }
+
         nav a:hover, nav a.active {
-            color: #d4af37;
-            border-bottom: 2px solid #d4af37;
+            color: var(--primary-neon);
+            border-bottom: 2px solid var(--primary-neon);
         }
+
+        /* حاوية المحتوى الرئيسية */
         .main-content {
             display: flex;
             justify-content: center;
@@ -58,350 +92,227 @@
             position: relative;
             z-index: 1;
         }
+
         .container {
-            max-width: 500px;
+            max-width: 650px;
             width: 100%;
         }
-        /* صورة رمزية */
-        .avatar {
-            width: 110px;
-            height: 110px;
+
+        /* إعدادات اللوجو المتحرك (الفيديو) */
+        .avatar-video {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #d4af37;
-            box-shadow: 0 0 30px rgba(212,175,55,0.4);
+            border: 3px solid var(--primary-neon);
             margin-bottom: 25px;
-            animation: float 4s ease-in-out infinite, glowPulse 2s infinite;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+            animation: float 4s ease-in-out infinite;
+            background-color: #0d0f14;
         }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); }
-            50% { box-shadow: 0 0 35px rgba(212,175,55,0.8); }
-        }
+
         h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
+            font-size: 2.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
             opacity: 0;
             animation: fadeInUp 0.8s ease 0.2s forwards;
         }
-        .bio {
-            font-size: 1em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            font-weight: 300;
+
+        .location {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 400;
             opacity: 0;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
         }
+
         .line {
-            width: 50px;
-            height: 2px;
-            background: #d4af37;
-            margin: 0 auto 25px;
-            border-radius: 1px;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+            margin: 0 auto 30px;
+            border-radius: 10px;
             animation: expandLine 1s ease forwards;
         }
+
         @keyframes expandLine {
             from { width: 0; }
-            to { width: 50px; }
+            to { width: 70px; }
         }
+
+        /* صندوق السيرة الذاتية الزجاجي والمريح جداً للعين */
+        .bio {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            line-height: 2;
+            margin-bottom: 35px;
+            background: var(--card-bg);
+            padding: 30px 25px;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight {
+            color: var(--primary-neon);
+            font-weight: 600;
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            background: #111;
-            border: 1px solid #2a2a2a;
-            color: #e0e0e0;
-            padding: 15px 25px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            position: relative;
-            overflow: hidden;
-        }
-        .link-btn:nth-child(1) { animation-delay: 0.4s; }
-        .link-btn:nth-child(2) { animation-delay: 0.5s; }
-        .link-btn:nth-child(3) { animation-delay: 0.6s; }
-        .link-btn:nth-child(4) { animation-delay: 0.7s; }
-        .link-btn:nth-child(5) { animation-delay: 0.8s; }
-        .link-btn:nth-child(6) { animation-delay: 0.9s; }
-        .link-btn:nth-child(7) { animation-delay: 1.0s; }
-        .link-btn:nth-child(8) { animation-delay: 1.1s; }
-        .link-btn:hover {
-            background: #1a1a1a;
-            border-color: #d4af37;
-            color: #d4af37;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212,175,55,0.2);
-        }
-        .link-btn i {
-            font-size: 1.6em;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-        .link-btn:hover i {
-            transform: scale(1.3) rotate(10deg);
-            color: #d4af37;
-        }
-        /* أيقونات محددة بألوانها الأصلية عند التحويم */
-        .fa-whatsapp:hover { color: #25D366 !important; }
-        .fa-instagram:hover { color: #E1306C !important; }
-        .fa-facebook:hover { color: #1877F2 !important; }
-        .fa-github:hover { color: #f5f5f5; }
-        .fa-telegram:hover { color: #0088cc; }
-        .fa-youtube:hover { color: #FF0000; }
-        .fa-globe:hover { color: #d4af37; }
-        .fa-user:hover { color: #d4af37; }
 
-        .footer {
-            margin-top: 35px;
-            font-size: 0.85em;
-            color: #666;
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-neon);
+            margin: 25px 0 15px;
+            font-weight: 700;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
         }
+
+        /* القائمة الإبداعية المحسنة بأسلوب مستقبلي */
+        .list {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .list li {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin: 14px 0;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .list li::before {
+            content: "▹";
+            color: var(--primary-neon);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--primary-neon);
+        }
+
+        /* تذييل الصفحة */
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 20px 0;
+            border-top: 1px solid var(--card-border);
+        }
+
         .footer span {
-            color: #d4af37;
+            color: var(--primary-neon);
+            font-weight: 600;
+        }
+
+        /* تجاوب تام وسلس مع الهواتف الذكية */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.1rem; }
+            .bio { font-size: 1rem; padding: 20px; }
+            .list li { font-size: 1rem; }
+            nav { padding: 1rem; gap: 10px; }
+            nav a { margin: 0 6px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- خلفية شبكية متحركة بلون نيون جذاب -->
     <canvas id="bg-canvas"></canvas>
 
+    <!-- شريط التنقل المتكامل المتناسق برمجياً -->
     <nav>
         <a href="index.html">🏠 الرئيسية</a>
-        <a href="about.html">👤 من أنا؟</a>
-        <a href="links.html" class="active">🔗 روابط</a>
-        <a href="https://files.tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
-        <a href="http://tmmamtech.blogspot.com" target="_blank">📰 المدونة</a>
+        <a href="about.html" class="active">👤 من أنا؟</a>
+        <a href="links.html">🔗 روابط</a>
+        <a href="https://tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
+        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
     </nav>
 
     <div class="main-content">
         <div class="container">
-            <img src="tech-logo.png" alt="تمام" class="avatar">
+            <!-- الشعار المتحرك (فيديو) متناسق مع الواجهة الأساسية -->
+            <video autoplay loop muted playsinline class="avatar-video">
+                <source src="tech-logo.mp4" type="video/mp4">
+                المتصفح لا يدعم تشغيل الفيديو.
+            </video>
+            
             <h1>تمام</h1>
-            <p class="bio">تمام للتقنية | tmmam tech</p>
+            <div class="location">من سوريا</div>
             <div class="line"></div>
 
-            <div class="links">
-                <!-- واتساب -->
-                <a href="https://wa.me/963000000000" target="_blank" class="link-btn">
-                    <i class="fa-brands fa-whatsapp"></i> واتساب
-                </a>
-                <!-- إنستغرام -->
-                <a href="https://instagram.com/tmmamtech" target="_blank" class="link-btn">
-                    <i class="fa-brands fa-instagram"></i> إنستغرام
-                </a>
-                <!-- فيسبوك -->
-                <a href="https://www.facebook.com/share/1GVcBV9ztw/" target="_blank" class="link-btn">
-                    <i class="fa-brands fa-facebook"></i> فيسبوك
-                </a>
-                <!-- تلغرام -->
-                <a href="https://t.me/tmmamtech" target="_blank" class="link-btn">
-                    <i class="fa-brands fa-telegram"></i> تلغرام
-                </a>
-                <!-- يوتيوب -->
-                <a href="https://youtube.com/@tmmamtech" target="_blank" class="link-btn">
-                    <i class="fa-brands fa-youtube"></i> يوتيوب
-                </a>
-                <!-- الموقع الشخصي -->
-                <a href="index.html" class="link-btn">
-                    <i class="fa-solid fa-globe"></i> موقعي الشخصي
-                </a>
-                <!-- من أنا؟ -->
-                <a href="about.html" class="link-btn">
-                    <i class="fa-solid fa-user"></i> من أنا؟
-                </a>
+            <div class="bio">
+                <p>أهلاً بك في <span class="highlight">تمام للتقنية</span>.</p>
+                <p>أنت في المكان الصحيح.</p>
+                <p>هنا ستجد مواضيع <span class="highlight">مفيدة ونادرة</span> في الويب والبرامج والتقنيات الحديثة.</p>
             </div>
 
+            <div class="section-title">💡 ماذا أقدّم؟</div>
+            <ul class="list">
+                <li>تجارب ونصائح في البرامج والتطبيقات</li>
+                <li>محتوى تقني نادر ومفيد</li>
+                <li>رحلة تعلم ومشاركة مستمرة</li>
+            </ul>
+            
             <div class="footer">
                 تصميم — <span>tmmam تمام ❤️</span>
             </div>
         </div>
     </div>
 
+    <!-- سكريبت بناء وتحديث الشبكة النيونية المتحركة بدقة وثبات -->
     <script>
-        // ===== خلفية شبكية متحركة =====
         (function() {
             const canvas = document.getElementById("bg-canvas");
             const ctx = canvas.getContext("2d");
             let w, h;
             const particles = [];
-            const particleCount = 40;
+            const particleCount = 45; // عدد جزيئات متزن لضمان السرعة والراحة البصرية
+            
             function resize() {
                 w = canvas.width = window.innerWidth;
                 h = canvas.height = window.innerHeight;
             }
             window.addEventListener("resize", resize);
             resize();
+            
             for (let i = 0; i < particleCount; i++) {
-                <script>
- <!-- ========== سلايدر أحدث المقالات من المدونة ========== -->
-<style>
-    .posts-slider-wrapper {
-        max-width: 600px;
-        margin: 40px auto;
-        text-align: center;
-    }
-    .posts-slider-title {
-        color: #d4af37;
-        font-size: 1.4em;
-        margin-bottom: 20px;
-    }
-    .posts-slider {
-        background: #111;
-        border: 1px solid #2a2a2a;
-        border-radius: 16px;
-        padding: 25px;
-        min-height: 120px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(212,175,55,0.15);
-    }
-    .post-slide {
-        opacity: 0;
-        transition: opacity 0.6s ease;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        text-align: center;
-    }
-    .post-slide.active {
-        opacity: 1;
-        position: relative;
-    }
-    .post-slide-title {
-        font-size: 1.3em;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    .post-slide-title a {
-        color: #d4af37;
-        text-decoration: none;
-    }
-    .post-slide-title a:hover {
-        text-decoration: underline;
-    }
-    .post-slide-date {
-        color: #888;
-        font-size: 0.85em;
-        margin-bottom: 6px;
-    }
-    .post-slide-snippet {
-        color: #b0b0b0;
-        font-size: 0.95em;
-        line-height: 1.6;
-    }
-    .slider-nav {
-        margin-top: 15px;
-    }
-    .slider-dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #2a2a2a;
-        border-radius: 50%;
-        margin: 0 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    .slider-dot.active-dot {
-        background: #d4af37;
-    }
-</style>
-
-<div class="posts-slider-wrapper">
-    <div class="posts-slider-title">📰 أحدث المقالات من المدونة</div>
-    <div class="posts-slider" id="posts-slider"></div>
-    <div class="slider-nav" id="slider-nav"></div>
-</div>
-
-<script>
-    const feedURL = 'https://blog.tmmamtech.xyz/feeds/posts/default?alt=json&max-results=5';
-    const sliderContainer = document.getElementById('posts-slider');
-    const navContainer = document.getElementById('slider-nav');
-
-    async function loadPosts() {
-        try {
-            const response = await fetch(feedURL);
-            if (!response.ok) throw new Error('Network error');
-            const data = await response.json();
-            const entries = data.feed.entry || [];
-            if (entries.length === 0) {
-                sliderContainer.innerHTML = '<p style="color:#888;">لا توجد مقالات بعد.</p>';
-                return;
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 1.5 + 0.5
+                });
             }
-
-            // إعداد الشرائح
-            entries.forEach((entry, index) => {
-                const title = entry.title.$t;
-                const link = entry.link.find(l => l.rel === 'alternate').href;
-                const date = new Date(entry.published.$t).toLocaleDateString('ar-SA');
-                // استخراج المقتطف (قد يكون في summary أو content)
-                let snippet = '';
-                if (entry.summary) {
-                    snippet = entry.summary.$t.replace(/<[^>]+>/g, '').substring(0, 120) + '...';
-                }
-                const slide = document.createElement('div');
-                slide.className = `post-slide ${index === 0 ? 'active' : ''}`;
-                slide.innerHTML = `
-                    <div class="post-slide-title"><a href="${link}" target="_blank">${title}</a></div>
-                    <div class="post-slide-date">📅 ${date}</div>
-                    <div class="post-slide-snippet">${snippet}</div>
-                `;
-                sliderContainer.appendChild(slide);
-
-                // نقطة التنقل
-                const dot = document.createElement('span');
-                dot.className = `slider-dot ${index === 0 ? 'active-dot' : ''}`;
-                dot.addEventListener('click', () => goToSlide(index));
-                navContainer.appendChild(dot);
-            });
-
-            // بدء السلايدر التلقائي
-            if (entries.length > 1) {
-                let current = 0;
-                setInterval(() => {
-                    const next = (current + 1) % entries.length;
-                    goToSlide(next);
-                }, 5000);
-            }
-        } catch (e) {
-            sliderContainer.innerHTML = '<p style="color:#888;">تعذر تحميل المقالات حالياً.</p>';
-            console.error(e);
-        }
-    }
-
-    function goToSlide(index) {
-        const slides = document.querySelectorAll('.post-slide');
-        const dots = document.querySelectorAll('.slider-dot');
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active-dot'));
-        if (slides[index]) slides[index].classList.add('active');
-        if (dots[index]) dots[index].classList.add('active-dot');
-    }
-
-    loadPosts();
-</script>
+            
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                ctx.strokeStyle = "rgba(0, 242, 254, 0.08)";
+                ctx.fillStyle = "rgba(0, 242, 254, 0.3)";
+                ctx.lineWidth = 0.5;
+                
