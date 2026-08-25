@@ -129,34 +129,60 @@
             border-radius: 10px;
         }
 
-        /* لوحة التأثير الكتابي المعززة زجاجياً */
-        .typing-box {
+        /* 🌌 تصميم السلايدر التفاعلي الأنيق والمريح للعين 🌌 */
+        .slider-container {
+            max-width: 600px;
+            margin: 0 auto 35px;
+            position: relative;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide-text {
             font-size: 1.25rem;
-            color: var(--text-main);
-            margin-bottom: 35px;
-            min-height: 2.5rem;
-            line-height: 1.6;
-            padding: 10px 15px;
-        }
-
-        .typing-text {
-            color: var(--primary-neon);
             font-weight: 600;
+            color: var(--primary-neon);
+            line-height: 1.6;
+            opacity: 0;
+            position: absolute;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            width: 100%;
+            pointer-events: none;
         }
 
-        .cursor-blink {
-            display: inline-block;
+        .slide-text.active {
+            opacity: 1;
+            position: relative;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* نقاط التحكم بالسلايدر في الأسفل */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
             background: var(--primary-neon);
-            width: 2px;
-            height: 1.2em;
-            margin-right: 4px;
-            vertical-align: middle;
-            animation: blink 0.8s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            transform: scale(1.2);
+            box-shadow: 0 0 8px var(--primary-neon);
         }
 
         /* الأزرار التفاعلية الأنيقة وعريضة اللمس للـ Mobile */
@@ -250,7 +276,7 @@
         /* تجاوب تام وسلس مع الهواتف الذكية */
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
-            .typing-box { font-size: 1.1rem; }
+            .slide-text { font-size: 1.1rem; }
             .btn { width: 100%; margin: 8px 0; }
             nav { padding: 1rem; gap: 10px; }
             nav a { margin: 0 6px; font-size: 0.85rem; }
@@ -262,18 +288,18 @@
     <!-- التوهج الخلفي المريح للعين -->
     <div class="bg-glow"></div>
 
-    <!-- شريط التنقل المتكامل من القديم بتصميم عصري -->
+    <!-- شريط التنقل المتكامل بتصميم عصري -->
     <nav>
         <a href="index.html" style="color: var(--primary-neon);">🏠 الرئيسية</a>
         <a href="about.html">👤 من أنا؟</a>
         <a href="links.html">🔗 روابط</a>
-        <a href="https://files.tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
-        <a href="https://blog.tmmamtech.xyz" target="_blank">📰 المدونة</a>
+        <a href="https://tmmamtech.xyz" target="_blank">☁️ استضافة الملفات</a>
+        <a href="https://tmmamtech.xyz" target="_blank">📰 المدونة</a>
     </nav>
 
     <div class="container">
         
-        <!-- الشعار المتحرك الاحترافي (فيديو) مجهز للعمل تلقائياً -->
+        <!-- الشعار المتحرك الاحترافي (فيديو) -->
         <video autoplay loop muted playsinline class="avatar-video">
             <source src="tech-logo.mp4" type="video/mp4">
             المتصفح لا يدعم تشغيل الفيديو.
@@ -283,38 +309,12 @@
         <p class="subtitle">tmmam tech</p>
         <div class="line"></div>
 
-        <!-- لوحة التأثير الكتابي الفعالة -->
-        <div class="typing-box">
-            <span class="typing-text" id="typingText"></span>
-            <span class="cursor-blink"></span>
-        </div>
-
-        <!-- أزرار الإجراء السريع المستوحاة من كودك السابق -->
-        <a href="about.html" class="btn">من أنا؟</a>
-        <a href="links.html" class="btn">روابط التواصل</a>
-
-        <!-- قسم استعراض محتوى المدونة بتوزيع متقن ومريح للبصر -->
-        <div class="blog-box">
-            <p class="title">📰 أحدث المقالات من المدونة</p>
-            <p class="desc">تعرّف على أحدث الشروحات التقنية والنصائح الحصرية من مدونة تمام للتقنية بأسلوب مبسط وممتع.</p>
-            <a href="https://blog.tmmamtech.xyz" target="_blank" class="btn-blog">📝 تصفح المدونة الآن</a>
-        </div>
-
-        <!-- التذييل مع الحفاظ التام على حقوقك والشغف المستمر -->
-        <div class="footer">
-            تصميم — <span>tmmam تمام</span> ❤️
-        </div>
-    </div>
-
-    <script>
-        const words = [
-            "رحلة شغف وإبداع في عالم التقنية.",
-            "هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات .",
-            "تجارب ونصائح في البرامج والتطبيقات.",
-            "رحلة تعلم ومشاركة مستمرة."
-        ];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
+        <!-- 🚀 صندوق السلايدر التفاعلي الجديد كلياً بديل الكتابة 🚀 -->
+        <div class="slider-container">
+            <div class="slide-text active">رحلة شغف وإبداع في عالم التقنية.</div>
+            <div class="slide-text">هنا ستجد مواضيع مفيدة ونادرة في الويب والبرامج والتقنيات.</div>
+            <div class="slide-text">تجارب ونصائح في البرامج والتطبيقات.</div>
+            <div class="slide-text">رحلة تعلم ومشاركة مستمرة.</div>
+            
+            <!-- نقاط تحكم جمالية في الأسفل -->
+            <div class="slider-dots">
