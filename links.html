@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>روابط — تمام للتقنية</title>
-    <!-- استدعاء خط ألكسندریا وأيقونات Font Awesome -->
+    <!-- استدعاء خط ألكسندریا وأيقونات Font Awesome الشهيرة -->
     <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cloudflare.com">
 
     <style>
         /* إعدادات المتغيرات والألوان النيونية والتقنية المريحة للعين */
         :root {
             --bg-dark: #0a0b10;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.07);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
             --primary-neon: #00f2fe;
             --secondary-neon: #4facfe;
             --text-main: #f3f4f6;
@@ -57,7 +57,7 @@
             align-items: center;
             flex-wrap: wrap;
             padding: 1.2rem 5%;
-            background: rgba(10, 11, 16, 0.75);
+            background: rgba(10, 11, 16, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--card-border);
@@ -95,8 +95,9 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
+            margin: 0 auto;
         }
 
         /* إعدادات اللوجو المتحرك (فيديو) الموحد */
@@ -110,6 +111,7 @@
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
             animation: float 4s ease-in-out infinite;
             background-color: #0d0f14;
+            display: inline-block;
         }
 
         @keyframes float {
@@ -125,8 +127,6 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
             letter-spacing: 0.5px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
         .bio {
@@ -134,37 +134,25 @@
             color: var(--text-muted);
             margin-bottom: 25px;
             font-weight: 400;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
         .line {
             width: 60px;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
-            margin: 0 auto 30px;
+            margin: 0 auto 35px;
             border-radius: 10px;
-            animation: expandLine 1s ease forwards;
         }
 
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: 60px; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* حاوية الأزرار العمودية */
+        /* حاوية الأزرار العمودية الصارمة باستخدام Flex */
         .links {
             display: flex;
             flex-direction: column;
             gap: 16px;
+            width: 100%;
         }
 
-        /* تصميم أزرار الروابط الزجاجية المستقبلية */
+        /* تصميم أزرار الروابط الزجاجية بدون أي اختفاء برميجي مسبق لضمان العمل التام */
         .link-btn {
             display: flex;
             align-items: center;
@@ -173,68 +161,63 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             color: var(--text-main);
-            padding: 15px 25px;
+            padding: 16px 25px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            position: relative;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 100%;
         }
-
-        /* أنيميشن الظهور المتتابع للأزرار بسلاسة */
-        .link-btn:nth-child(1) { animation-delay: 0.4s; }
-        .link-btn:nth-child(2) { animation-delay: 0.5s; }
-        .link-btn:nth-child(3) { animation-delay: 0.6s; }
-        .link-btn:nth-child(4) { animation-delay: 0.7s; }
-        .link-btn:nth-child(5) { animation-delay: 0.8s; }
-        .link-btn:nth-child(6) { animation-delay: 0.9s; }
-        .link-btn:nth-child(7) { animation-delay: 1.0s; }
 
         .link-btn i {
             font-size: 1.4rem;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
-        /* تأثير التكبير والتدوير الطفيف للأيقونات عند التحويم */
+        /* تأثير التكبير الطفيف للأيقونات عند التحويم */
         .link-btn:hover i {
-            transform: scale(1.25) rotate(8deg);
+            transform: scale(1.2);
         }
 
-        /* 🌈 تأثيرات توهج نيونية مخصصة واحترافية عند التحويم بكل شبكة 🌈 */
+        /* 🌈 تأثيرات توهج نيونية ثابتة واحترافية عند التحويم بكل شبكة 🌈 */
         .link-whatsapp:hover {
             border-color: #25D366;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.25);
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
             color: #25D366;
+            background: rgba(37, 211, 102, 0.02);
         }
         .link-instagram:hover {
             border-color: #E1306C;
-            box-shadow: 0 0 20px rgba(225, 48, 108, 0.25);
+            box-shadow: 0 0 20px rgba(225, 48, 108, 0.3);
             color: #E1306C;
+            background: rgba(225, 48, 108, 0.02);
         }
         .link-facebook:hover {
             border-color: #1877F2;
-            box-shadow: 0 0 20px rgba(24, 119, 242, 0.25);
+            box-shadow: 0 0 20px rgba(24, 119, 242, 0.3);
             color: #1877F2;
+            background: rgba(24, 119, 242, 0.02);
         }
         .link-telegram:hover {
             border-color: #0088cc;
-            box-shadow: 0 0 20px rgba(0, 136, 204, 0.25);
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
             color: #0088cc;
+            background: rgba(0, 136, 204, 0.02);
         }
         .link-youtube:hover {
             border-color: #FF0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.25);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             color: #FF0000;
+            background: rgba(255, 0, 0, 0.02);
         }
         .link-globe:hover, .link-user:hover {
             border-color: var(--primary-neon);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
             color: var(--primary-neon);
+            background: rgba(0, 242, 254, 0.02);
         }
 
         /* تذييل الصفحة */
@@ -244,6 +227,7 @@
             color: var(--text-muted);
             padding: 20px 0;
             border-top: 1px solid var(--card-border);
+            width: 100%;
         }
         .footer span {
             color: var(--primary-neon);
@@ -253,7 +237,7 @@
         /* تجاوب تام وسلس مع الهواتف الذكية */
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
-            .link-btn { padding: 13px 20px; font-size: 1rem; }
+            .link-btn { padding: 14px 20px; font-size: 1rem; }
             nav { padding: 1rem; gap: 10px; }
             nav a { margin: 0 6px; font-size: 0.85rem; }
         }
@@ -287,16 +271,27 @@
 
             <div class="links">
                 <!-- واتساب -->
-                <a href="https://wa.me/963000000000" target="_blank" class="link-btn link-whatsapp">
+                <a href="https://wa.me" target="_blank" class="link-btn link-whatsapp">
                     <i class="fa-brands fa-whatsapp"></i> واتساب
                 </a>
                 <!-- إنستغرام -->
-                <a href="https://instagram.com/tmmamtech" target="_blank" class="link-btn link-instagram">
+                <a href="https://instagram.com" target="_blank" class="link-btn link-instagram">
                     <i class="fa-brands fa-instagram"></i> إنستغرام
                 </a>
                 <!-- فيسبوك -->
-                <a href="https://www.facebook.com/share/1GVcBV9ztw/" target="_blank" class="link-btn link-facebook">
+                <a href="https://facebook.com" target="_blank" class="link-btn link-facebook">
                     <i class="fa-brands fa-facebook"></i> فيسبوك
                 </a>
                 <!-- تلغرام -->
-                <a href="https://t.me/tmmamtech" target="_blank" class="link-btn link-telegram">
+                <a href="https://t.me" target="_blank" class="link-btn link-telegram">
+                    <i class="fa-brands fa-telegram"></i> تلغرام
+                </a>
+                <!-- يوتيوب -->
+                <a href="https://youtube.com" target="_blank" class="link-btn link-youtube">
+                    <i class="fa-brands fa-youtube"></i> يوتيوب
+                </a>
+                <!-- الموقع الشخصي -->
+                <a href="index.html" class="link-btn link-globe">
+                    <i class="fa-solid fa-globe"></i> موقعي الشخصي
+                </a>
+                <!-- من أنا؟ -->
