@@ -26,32 +26,26 @@
             width: 100%;
         }
         
-        /* تصميم الحاوية الخاصة باللوجو المتحرك */
+        /* حاوية الفيديو المتحرك */
         .logo-container {
             margin-bottom: 20px;
             position: relative;
             display: inline-block;
         }
         
-        /* استدعاء اللوجو الخاص بك وتطبيق حركة عائمة عليه */
-        .brand-logo {
-            width: 120px; /* يمكنك تعديل المقاس حسب رغبتك */
+        /* تنسيق الفيديو ليظهر كـ شعار متناسق وجميل */
+        .brand-video-logo {
+            width: 150px; /* يمكنك تكبير أو تصغير الحجم من هنا */
             height: auto;
-            animation: floatLogo 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); /* توهج ذهبي خفيف خلف اللوجو */
-            transition: transform 0.3s ease;
+            border-radius: 50%; /* إذا كان اللوجو دائرياً، وإذا كان مربعاً يمكنك مسح هذا السطر أو جعله 12px */
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); /* تأثير توهج ذهبي خفيف */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* حركات التفاعل عند تمرير الماوس فوق اللوجو */
-        .brand-logo:hover {
-            transform: scale(1.08) rotate(3s);
-            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
-        }
-
-        /* أنيميشن الحركة العائمة */
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* تأثير رائع عند تمرير الماوس فوق اللوجو */
+        .brand-video-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
         h1 {
@@ -121,9 +115,12 @@
 <body>
     <div class="container">
         
-        <!-- قسم اللوجو المحدث بدلاً من الإيموجي التقليدي -->
+        <!-- قسم اللوجو الفيديو المطور -->
         <div class="logo-container">
-            <img src="tech-logo.png" alt="Tmmam Tech Logo" class="brand-logo">
+            <video class="brand-video-logo" autoplay loop muted playsinline>
+                <source src="tech-logo.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو.
+            </video>
         </div>
 
         <h1>تمام للتقنية</h1>
