@@ -5,127 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تمام للتقنية | tmmam tech</title>
     <style>
+        @import url('https://googleapis.com');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            background-color: #0a0a0a;
-            color: #f1f1f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #060b13; /* خلفية زرقاء داكنة جداً ذات طابع تقني */
+            color: #e2e8f0;
+            font-family: 'Cairo', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            text-align: center;
             padding: 20px;
+            background-image: radial-gradient(circle at top right, rgba(0, 168, 204, 0.15), transparent 450px);
         }
-        .container {
-            max-width: 700px;
+
+        /* الحاوية الرئيسية بطابع زجاجي حديث */
+        .main-container {
+            background: rgba(10, 20, 38, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 168, 204, 0.2);
+            border-radius: 24px;
+            max-width: 650px;
             width: 100%;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
-        
+
         /* حاوية الفيديو المتحرك */
-        .logo-container {
-            margin-bottom: 20px;
+        .logo-box {
+            margin-bottom: 25px;
             position: relative;
             display: inline-block;
         }
-        
-        /* تنسيق الفيديو ليظهر كـ شعار متناسق وجميل */
-        .brand-video-logo {
-            width: 150px; /* يمكنك تكبير أو تصغير الحجم من هنا */
-            height: auto;
-            border-radius: 50%; /* إذا كان اللوجو دائرياً، وإذا كان مربعاً يمكنك مسح هذا السطر أو جعله 12px */
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); /* تأثير توهج ذهبي خفيف */
+
+        /* تنسيق فيديو اللوجو مع هالة إضاءة زرقاء */
+        .brand-video {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #00a8cc;
+            box-shadow: 0 0 25px rgba(0, 168, 204, 0.4);
+            animation: float 4s ease-in-out infinite;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* تأثير رائع عند تمرير الماوس فوق اللوجو */
-        .brand-video-logo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        .brand-video:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(0, 168, 204, 0.7);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         h1 {
-            font-size: 2.8em;
-            font-weight: 700;
+            font-size: 2.6rem;
             color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
+
         .subtitle {
-            font-size: 1.2em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            font-weight: 300;
+            font-size: 1.2rem;
+            color: #00a8cc;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
+
         .line {
-            width: 60px;
-            height: 2px;
-            background: #d4af37; /* لون ذهبي فاخر */
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00a8cc, transparent);
             margin: 0 auto 30px;
-            border-radius: 1px;
+            border-radius: 2px;
         }
+
         .description {
-            font-size: 1.3em;
-            color: #d0d0d0;
+            font-size: 1.2rem;
+            color: #cbd5e1;
             margin-bottom: 18px;
             line-height: 1.8;
             font-weight: 400;
         }
+
         .highlight {
-            color: #d4af37;
+            color: #00a8cc;
             font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 168, 204, 0.3);
         }
+
+        /* حاوية الأزرار لتنسيقها بشكل مرن */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        /* تصميم الأزرار الزرقاء المستقبلية */
         .btn {
-            display: inline-block;
-            background: transparent;
-            border: 1.5px solid #d4af37;
-            color: #d4af37;
-            padding: 12px 32px;
-            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 168, 204, 0.05);
+            border: 1.5px solid rgba(0, 168, 204, 0.4);
+            color: #ffffff;
+            padding: 12px 28px;
+            font-size: 1rem;
             border-radius: 30px;
             text-decoration: none;
-            margin: 10px 10px;
-            transition: 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            gap: 8px;
         }
+
         .btn:hover {
-            background: #d4af37;
-            color: #0a0a0a;
+            background: #00a8cc;
+            color: #060b13;
+            box-shadow: 0 0 20px rgba(0, 168, 204, 0.4);
+            transform: translateY(-2px);
+            border-color: #00a8cc;
         }
-        
+
+        /* زر المكتبة المميز بتأثير النبض لحذب الطلاب */
+        .btn-prime {
+            background: linear-gradient(45deg, #00a8cc, #007799);
+            border: none;
+            color: #060b13;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-prime:hover {
+            background: linear-gradient(45deg, #00c3eb, #002233);
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(0, 168, 204, 0.6);
+        }
+
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { box-shadow: 0 0 0 0 rgba(0, 168, 204, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 168, 204, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 168, 204, 0); }
         }
+
+        /* شارة "جديد" المضيئة داخل الأزرار */
+        .badge {
+            background: #ffffff;
+            color: #060b13;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-right: 5px;
+        }
+
         .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
+            margin-top: 45px;
+            font-size: 0.85rem;
+            color: #64748b;
         }
+
         .footer span {
-            color: #d4af37;
+            color: #00a8cc;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="main-container">
         
-        <!-- قسم اللوجو الفيديو المطور -->
-        <div class="logo-container">
-            <video class="brand-video-logo" autoplay loop muted playsinline>
+        <!-- قسم اللوجو الفيديو المتحرك الخاص بموقعك -->
+        <div class="logo-box">
+            <video class="brand-video" autoplay loop muted playsinline>
                 <source src="tech-logo.mp4" type="video/mp4">
-                متصفحك لا يدعم تشغيل الفيديو.
+                المتصفح لا يدعم تشغيل الفيديو.
             </video>
         </div>
 
         <h1>تمام للتقنية</h1>
         <div class="subtitle">tmmam tech</div>
         <div class="line"></div>
+        
         <p class="description">
             رحلة شغف وإبداع تدمج بين عالم التقنية الرقمية وهندسة السيارات.
         </p>
@@ -133,28 +205,24 @@
             هنا تجدون شروحات <span class="highlight">ميكانيك وكهرباء السيارات</span>، البرامج الحديثة، والملخصات الحصرية لطلابنا.
         </p>
         
-        <a href="about.html" class="btn">من أنا؟</a>
-        
-        <a href="education.html" class="btn" style="border-color: #ffb703; color: #ffb703; animation: pulse 2s infinite;">
-            📚 المكتبة والملخصات
-        </a>
+        <!-- مجموعة الأزرار المحدثة بالتصميم التفاعلي الأزرق -->
+        <div class="btn-group">
+            <a href="about.html" class="btn">👤 من أنا؟</a>
+            
+            <a href="education.html" class="btn btn-prime">
+                📚 المكتبة والملخصات
+            </a>
 
-        <a href="links.html" class="btn">
-            روابط التواصل
-            <span style="
-                background: #d4af37;
-                color: #0a0a0a;
-                font-size: 0.7em;
-                font-weight: bold;
-                padding: 3px 8px;
-                border-radius: 12px;
-                margin-right: 8px;
-            ">جديد</span>
-        </a>
+            <a href="links.html" class="btn">
+                🔗 روابط التواصل
+                <span class="badge">جديد</span>
+            </a>
+        </div>
         
         <div class="footer">
             تصميم وتطوير — <span>tmmam تمام ❤️</span>
         </div>
     </div>
+
 </body>
 </html>
